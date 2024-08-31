@@ -1,0 +1,33 @@
+<ion-header [translucent]="true">
+  <ion-toolbar style="text-align: center;">
+    <ion-title>login agenda 2024</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div>
+    <img src="../../../assets/img/agenda.gif" alt="" srcset="">
+  </div>
+  <div>
+    <ion-list>
+
+      <ion-item>
+        <ion-input label="Nombre Usuario" 
+        placeholder="ingrese nombre usuario"
+        [(ngModel)]="nombre"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-input label="Contraseña" type="password"
+        placeholder="ingrese password"
+        [(ngModel)]="password"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-button (click)="validar()">OK</ion-button>
+        <ion-button expand="block" routerLink="/RecuperarContraseña">Recuperar Contraseña</ion-button>
+
+      </ion-item>
+    </ion-list>
+  </div>
+</ion-content>
