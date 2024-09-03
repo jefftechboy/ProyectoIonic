@@ -21,8 +21,8 @@ export class LoginPage implements OnInit {
     let users: User[] = [
       {
         idUser:1,
-        username: 'meko',
-        password: '1234',
+        username: 'fre.camposo@profesor.duoc.cl',
+        password: 'admin',
         profile: {
           id:1,
           code: 'profe',
@@ -31,7 +31,7 @@ export class LoginPage implements OnInit {
       },
       {
         idUser:2,
-        username: 'dartel',
+        username: 'ro.huaitro@duocuc.cl',
         password: '1234',
         profile: {
           id:2,
@@ -69,10 +69,9 @@ export class LoginPage implements OnInit {
 
   async presentAlert() {
     const alert = await this.alertController.create({
-      header: 'Login',
-      subHeader: 'Acceso al sistema agenda',
-      message: 'Usuario o password incorrecto',
-      buttons: ['Action'],
+      header: 'Inicio sesión',
+      message: 'Usuario o contraseña incorrecto',
+      buttons: ['Aceptar'],
     });
 
     await alert.present();
