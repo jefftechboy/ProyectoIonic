@@ -1,4 +1,4 @@
-import { Component,OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-home',
@@ -7,13 +7,18 @@ import { Component,OnInit } from '@angular/core';
 })
 export class HomePage implements OnInit {
 
-  usuario:string=''
+  usuario: string = '';
+  profileCode: string = '';
 
   constructor() {}
 
   ngOnInit(): void {
-    var x=localStorage.getItem("usuario")
-    this.usuario=x ?? ''
+    // Recuperar el nombre de usuario
+    const storedUser = localStorage.getItem('userLogin');
+    if (storedUser) {
+      const userLogin = JSON.parse(storedUser);
+      this.usuario = userLogin.username || '';
+      this.profileCode = userLogin.profile?.code || '';
+    }
   }
-
 }
