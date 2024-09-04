@@ -1,16 +1,31 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>QrDocente</ion-title>
+    <ion-title style="text-align: center;">Asistencia Alumno</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <div>
-    <ion-title size="large">  Generar QR Docencia </ion-title>
-    <p> Clase en proceso</p>
-    <ion-button> Asignatura Seccion horario </ion-button>
-    <p></p>
-      <ion-button (click)="presentAlert()">Leer QR</ion-button>
-  </div>
+<ion-content [fullscreen]="true" style="text-align: center;">
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>REGISTRO DE ASISTENCIA</ion-card-title>
+      <h2>CLASE ACTUAL EN CURSO </h2>
+      <ion-button style="pointer-events: none;" > 
+        <ion-grid>
+          <ion-row>
+            <ion-col size="6">Arquitectura</ion-col>
+            <ion-col size="2">009D</ion-col>
+            <ion-col size="4">Lunes 8:31-09:50</ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-button>
+    </ion-card-header>
+  
+
+
+    <ion-button (click)="presentAlert()">Leer QR</ion-button>
+
+
+
+  </ion-card>
 </ion-content>
 

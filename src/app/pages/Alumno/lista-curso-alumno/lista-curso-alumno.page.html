@@ -1,12 +1,42 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>ListaCursoAlumno</ion-title>
+    <ion-title>Listado de cursos</ion-title>
   </ion-toolbar>
 </ion-header>
-
 <ion-content [fullscreen]="true">
+  <div class="content">
+    <div *ngFor="let dropdownState of dropdownStates; let i = index">
+      <ion-button class="botonListadoCursoAlumno" (click)="toggleDropdown(i)" expand="block">
+        <ion-grid>
+          <ion-row>
+            <ion-col size="8">Asignatura {{ i + 1 }}</ion-col>
+            <ion-col size="1"></ion-col>
+            <ion-col size="3">Seccion</ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-button>
 
-      <ion-title size="large">ListaCursoAlumno</ion-title>
-      <ion-button>  Asignatura Seccion % </ion-button>
-  <h2 style="color: red; ">*Aca es un comprimido por botones*</h2>
+      <div *ngIf="dropdownState" class="dropdown-list">
+        <ion-list>
+          <ion-item *ngFor="let item of itemsDropdowns[i]">
+            <ion-grid>
+              <ion-row>
+                <ion-col size="6">Dia/Hora</ion-col>
+                <ion-col size="2"></ion-col>
+                <ion-col size="4">{{ item }}</ion-col>
+              </ion-row>
+            </ion-grid>
+          </ion-item>
+        </ion-list>
+      </div>
+    </div>
+  </div>
 </ion-content>
+
+
+
+
+
+
+
+

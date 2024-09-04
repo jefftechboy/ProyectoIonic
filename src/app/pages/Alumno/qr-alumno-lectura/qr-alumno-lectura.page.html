@@ -5,9 +5,33 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">QrAlumnoLectura</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <div class="cuadroQr">
+    <img src="https://w7.pngwing.com/pngs/1006/79/png-transparent-qr-code-qr-code-qr-code-thumbnail.png" 
+    style="width: 280px;
+    height: 280px;">
+    <h2 style="text-align: center;">Escanea el Codigo QR</h2>
+  </div>
+
+
+  <ion-button id="present-alert1" class="botonAsistenciaGuardada" >Click Me</ion-button>
+  <ion-button id="present-alert2" class="botonAsistenciaGuardada2" >Click Me</ion-button>
+  <ion-button id="present-alert3" class="botonAsistenciaGuardada3" >Click Me</ion-button>
+  <ion-alert
+    trigger="present-alert1"
+    header="ERROR"
+    message="El dispositivo no se encuentra en el aula"
+    [buttons]="alertButtons"
+  ></ion-alert>
+  <ion-alert
+    trigger="present-alert2"
+    header="ERROR 404"
+    message="Ha habido error en la lectura intentalo de nuevo"
+    [buttons]="alertButtons"
+  ></ion-alert>
+  <ion-alert
+    trigger="present-alert3"
+    header=" EXITO "
+    message="La asistencia fue grabada"
+    [buttons]="alertButtons"
+  ></ion-alert>
 </ion-content>
