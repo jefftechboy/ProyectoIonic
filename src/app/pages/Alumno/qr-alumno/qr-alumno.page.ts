@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AlertController, NavController } from '@ionic/angular';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-qr-alumno',
@@ -8,17 +9,24 @@ import { AlertController, NavController } from '@ionic/angular';
 })
 export class QrAlumnoPage implements OnInit {
 
-  constructor(private alertController: AlertController, private navCtrl: NavController) { 
+  constructor(private alertController: AlertController, private navCtrl: NavController, private router: Router) { 
     
 
   }
-  alertButtons = ['Verificar'];
   ngOnInit() {
   }
   async presentAlert() {
     const alert = await this.alertController.create({
-      header: 'Verificacion',
-      message: 'Ingresa el codigo enviado a tu celular',
+      header: 'Verificación',
+      message: 'Ingresa el código enviado a tu celular',
+      cssClass: 'AlertaVerificacion',
+      inputs: [
+        {
+          name: 'codigo',
+          type: 'text',
+          placeholder: 'Código',
+        }
+      ],
       buttons: [
         {
           text: 'Cancelar',
@@ -27,18 +35,34 @@ export class QrAlumnoPage implements OnInit {
           handler: () => {
             console.log('Confirm Cancel');
           }
-        }, {
+        },
+        {
           text: 'Confirmar',
-          handler: () => {
-            console.log('Confirm Okay');
-            // Redirige a otra página aquí
-            this.navCtrl.navigateForward('/QrAlumnoLectura'); // Reemplaza '/otra-pagina' con la ruta deseada
+          handler: (data) => {
+            const codigo = data.codigo;
+
+            // Verificar si el código es "56789"
+            if (codigo === '56789') {
+              console.log('Código correcto');
+              // Redirige a otra página aquí usando Router
+              this.router.navigate(['/QrAlumnoLectura']); // Reemplaza '/listadoCursoDocente' con la ruta deseada
+            } else {
+              console.log('Código incorrecto');
+              // Mostrar un mensaje de error o realizar alguna otra acción
+              // Puedes crear otro alert o mostrar un mensaje en la interfaz de usuario
+            }
           }
         }
       ]
     });
-  
+
     await alert.present();
   }
+  
+
+
+
+  
+
   
 }

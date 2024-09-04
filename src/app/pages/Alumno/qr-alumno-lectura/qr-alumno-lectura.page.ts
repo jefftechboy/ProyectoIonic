@@ -8,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 export class QrAlumnoLecturaPage implements OnInit {
 
   constructor() { }
-
+  alertButtons = ['Action'];
   ngOnInit() {
   }
 
