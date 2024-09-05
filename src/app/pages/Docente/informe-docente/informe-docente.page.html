@@ -1,26 +1,18 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>Informe Docente</ion-title>
+  <ion-toolbar style="background-color: #003366;">
+    <ion-title style="color: #FFD700;">Informe Docente</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-button size="large" style="margin-top: 50px;" id="present-alert" >Asignatura Seccion Horario ejemplo uno</ion-button>
-  <p></p>
-  <ion-button size="large" style="margin-top: 50px;" >Asignatura Seccion Horario  ></ion-button>
-  <p></p>
-  <ion-button size="large" style="margin-top: 50px;" >Asignatura Seccion Horario  ></ion-button>
-  <p></p>
-  <ion-button size="large" style="margin-top: 50px;" >Asignatura Seccion Horario  ></ion-button>
-  <p></p>
-  <ion-button size="large" style="margin-top: 50px;" >Asignatura Seccion Horario  ></ion-button>
-  <p></p>
+<ion-content [fullscreen]="true" style="background-color: #FFFFFF;">
+  <!-- Lista de asignaturas -->
+  <ion-list>
+    <ion-item *ngFor="let asignatura of asignaturas" (click)="openModal(asignatura)" style="background-color: #FFFFFF; color: #000000;">
+      <ion-label>
+        <h2 style="color: #003366;">{{ asignatura.nombre }}</h2>
+        <p style="color: #003366;">{{ asignatura.seccion }} - {{ asignatura.horario }}</p>
+      </ion-label>
+      <ion-icon slot="end" name="checkmark-circle" color="success"></ion-icon>
+    </ion-item>
+  </ion-list>
 </ion-content>
-
-<ion-alert
-  trigger="present-alert"
-  header="Aca va la opcion de tipo de archivo"
-  message="Aca si quiere copia al correo"
-  [buttons]="alertButtons"
-></ion-alert>
-

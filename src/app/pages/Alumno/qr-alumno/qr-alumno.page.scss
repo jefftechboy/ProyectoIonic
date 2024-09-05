@@ -1,8 +1,3 @@
-.AlertaVerificacion {
-    .alert-message {
-      color: red; // Color del texto del mensaje de error
-      font-size: 14px; // Tamaño de la fuente
-      margin-top: 10px; // Espacio arriba del mensaje
-    }
-  }
-  
+ion-content {
+  --background: black; /* Reemplaza con el color que desees */
+}
