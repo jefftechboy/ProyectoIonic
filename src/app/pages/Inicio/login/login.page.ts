@@ -21,11 +21,7 @@ export class LoginPage implements OnInit {
     let users: User[] = [
       {
         idUser:1,
-<<<<<<< HEAD
         username: 'fre.camposo@profesor.duoc.cl',
-=======
-        username: 'freddy',
->>>>>>> fb9494c (Mensaje descriptivo del commit)
         password: 'admin',
         profile: {
           id:1,
@@ -35,11 +31,7 @@ export class LoginPage implements OnInit {
       },
       {
         idUser:2,
-<<<<<<< HEAD
         username: 'ro.huaitro@duocuc.cl',
-=======
-        username: 'robertito',
->>>>>>> fb9494c (Mensaje descriptivo del commit)
         password: '1234',
         profile: {
           id:2,
