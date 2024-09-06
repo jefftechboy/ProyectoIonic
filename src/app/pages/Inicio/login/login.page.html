@@ -5,13 +5,10 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <div>
-    <img src="../../../assets/img/logoRegistrAPP.png" alt="" srcset="">
-  </div>
-  <div>
+  <div class="login2">
     <ion-list>
 
-      <ion-item>
+      <ion-item  style="background-color: black;">
         <ion-input 
           placeholder="Usuario"
           [(ngModel)]="nombre"
@@ -29,10 +26,10 @@
       </ion-item>
 
       <ion-item>
-        <ion-button style="margin-left: 33%;" (click)="validar()">Iniciar sesión</ion-button>
+        <ion-button class="login" (click)="validar()">Iniciar sesión</ion-button>
       </ion-item>
       <ion-item>
-        <ion-button expand="block" routerLink="/RecuperarContraseña">Recuperar Contraseña</ion-button>
+        <ion-button  class="login" expand="block" routerLink="/RecuperarContraseña">Recuperar Contraseña</ion-button>
       </ion-item>
     </ion-list>
   </div>
