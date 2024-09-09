@@ -1,0 +1,32 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>notfound</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+ 
+  <img src="https://cdn.pixabay.com/photo/2022/07/27/06/04/smile-7347220_1280.jpg" alt="">
+  <mat-slide-toggle>Toggle me!</mat-slide-toggle>
+
+  <mat-form-field>
+    <mat-label>Choose a date</mat-label>
+    <input matInput [matDatepicker]="picker">
+    <mat-hint>MM/DD/YYYY</mat-hint>
+    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
+  
+  <ion-card #card>
+    <ion-card-content>Card</ion-card-content>
+  </ion-card>
+  
+  <ion-button (click)="play()">Play</ion-button>
+  <ion-button (click)="pause()">Pause</ion-button>
+  <ion-button (click)="stop()">Stop</ion-button>
+
+  
+</ion-content>
+<ion-footer>
+  <app-pie></app-pie>
+</ion-footer>

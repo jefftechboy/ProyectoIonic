@@ -1,0 +1,36 @@
+<ion-header [translucent]="true">
+  <ion-toolbar style="background-color: #003366;">
+    <ion-title style="color: #FFD700;">Detalles del Curso</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding" style="background-color: #FFFFFF;">
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title style="color: #003366;">Asignatura: Aplicacion Movil</ion-card-title>
+      <ion-card-subtitle style="color: #FFD700;">Código: 52231</ion-card-subtitle>
+    </ion-card-header>
+
+    <ion-card-content>
+      <ion-item>
+        <ion-label>
+          <h2 style="color: #003366;"><strong>Sección: 012D</strong></h2>
+          <p style="color: #f7f4f4;">Horario: Lunes y Miércoles, 10:00 - 12:00</p>
+          <p style="color: #f7f4f4;">Profesor: Nombre del Profesor</p>
+          <p style="color: #f7f4f4;">Número de Alumnos: 30</p>
+        </ion-label>
+      </ion-item>
+      
+
+      <ion-button expand="full" style="--background: #FFD700; --color: #003366;" class="ion-margin-top" routerLink="/listAsisTomada">
+        <strong>Ver Lista de Asistencia</strong>
+      </ion-button>
+    </ion-card-content>
+    </ion-card>
+    <footer>
+      <ion-button expand="medium" style="--background: #FFD700; --color: #003366;" class="ion-margin-top" routerLink="/listadoCursoDocente">
+        <strong>Volver</strong>
+      </ion-button>
+    </footer>
+</ion-content>
+

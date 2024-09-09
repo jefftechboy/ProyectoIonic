@@ -1,0 +1,24 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Bienvenido {{usuario}}
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div style="padding: 10px;">
+    <!-- Mostrar botones para profesores -->
+    <ng-container *ngIf="profileCode === 'profe'">
+      <ion-button expand="block" routerLink="/listadoCursoDocente">Lista Curso Docente</ion-button>
+      <ion-button expand="block" routerLink="/GenerarQrDocente">Generar QR Docente</ion-button>
+      <ion-button expand="block" routerLink="/InformesCursoDocente">Informes Docente</ion-button>
+    </ng-container>
+
+    <!-- Mostrar botones para alumnos -->
+    <ng-container *ngIf="profileCode === 'alum'">
+      <ion-button expand="block" routerLink="/listadoCursoAlumno">Lista Cursos Alumnos</ion-button>
+      <ion-button expand="block" routerLink="/QrAlumno">Lectura QR Alumnos</ion-button>
+    </ng-container>
+  </div>
+</ion-content>

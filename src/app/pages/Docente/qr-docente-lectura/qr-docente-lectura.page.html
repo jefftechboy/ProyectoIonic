@@ -1,0 +1,39 @@
+<ion-header [translucent]="true">
+  <ion-toolbar style="background-color: #003366;">
+    <ion-title style="color: #FFD700;">Generar QR Asistencia</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding" style="background-color: #FFFFFF;">
+  <ion-card class="ion-text-center">
+    <ion-card-header>
+      <ion-card-title style="color: #003366;">Código QR de Asistencia</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <img src="https://softmatic.com/images/QR%20Example%20Umlauts%20Accented.png" alt="QR Code" style="max-width: 100%; border: 2px solid #FFD700; border-radius: 8px;">
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card class="ion-text-center">
+    <ion-card-header>
+      <ion-card-title style="color: #003366;">Temporizador</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <!-- Cuadro del temporizador -->
+      <div *ngIf="temporizadorIniciado" class="temporizador-cuadro" style="background-color: #003366; border: 3px solid #FFD700; border-radius: 15px; padding: 20px; box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.15);">
+        <h2 class="temporizador-texto" style="color: #FFD700; font-size: 3.5rem; font-weight: bold;">{{ tiempoFormateado }}</h2>
+      </div>
+      
+      <!-- Botón para iniciar el temporizador -->
+      <ion-button *ngIf="!temporizadorIniciado" expand="full" style="--background: #FFD700; --color: #003366;" (click)="iniciarTemporizador()">
+        Iniciar Temporizador
+      </ion-button>
+    </ion-card-content>
+  </ion-card>
+  <footer>
+    <ion-button expand="medium" style="--background: #FFD700; --color: #003366;" class="ion-margin-top" routerLink="/GenerarQrDocente">
+      <strong>Volver</strong>
+    </ion-button>
+  </footer>
+</ion-content>
+

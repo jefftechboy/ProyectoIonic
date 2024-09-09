@@ -1,0 +1,45 @@
+:root {
+    --primary-blue: #003366;
+    --secondary-yellow: #FFD700;
+    --background-white: #FFFFFF;
+    --text-black: #000000;
+    --text-dark-blue: #003366;
+  }
+  
+  ion-header {
+    --background: var(--primary-blue);
+  }
+  
+  ion-toolbar {
+    --background: var(--primary-blue);
+  }
+  
+  ion-title {
+    color: var(--secondary-yellow);
+  }
+  
+  ion-content {
+    background-color: var(--background-white);
+  }
+  
+  ion-list {
+    padding: 0;
+  }
+  
+  ion-item {
+    --background: var(--background-white);
+    color: var(--text-black);
+  }
+  
+  ion-item ion-label h2 {
+    color: var(--text-dark-blue);
+  }
+  
+  ion-item ion-label p {
+    color: var(--text-dark-blue);
+  }
+  
+  ion-icon {
+    color: var(--primary-blue); // Cambia el color del ícono si lo deseas
+  }
+  
