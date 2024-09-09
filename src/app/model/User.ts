@@ -1,4 +1,5 @@
 import { Profile } from "./Profile";
+import { Auth } from "@angular/fire/auth";
 
 export class User {
     public idUser: number;

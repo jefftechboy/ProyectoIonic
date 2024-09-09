@@ -14,7 +14,7 @@ export class LoginPage implements OnInit {
     private navCtrl: NavController
   ) { }
 
-  nombre:string=''
+  username:string=''
   password:string=''
 
   ngOnInit() {
@@ -31,7 +31,7 @@ export class LoginPage implements OnInit {
       },
       {
         idUser:2,
-        username: 'robertito',
+        username: 'alan',
         password: '1234',
         profile: {
           id:2,
@@ -53,11 +53,11 @@ export class LoginPage implements OnInit {
   validar() {
   
     let listLogin: User[] = JSON.parse(localStorage.getItem('users') || '[]');
-    let userLogin = listLogin.find(usr => usr.username === this.nombre && usr.password === this.password);
+    let userLogin = listLogin.find(usr => usr.username === this.username && usr.password === this.password);
 
     if (userLogin) {
         console.log("Bienvenido");
-        localStorage.setItem("usuario", this.nombre);
+        localStorage.setItem("usuario", this.username);
         localStorage.setItem("userLogin",JSON.stringify(userLogin));
         this.navCtrl.navigateForward(['/home']);
     } else {

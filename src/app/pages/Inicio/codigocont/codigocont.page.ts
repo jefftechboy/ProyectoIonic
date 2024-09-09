@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-codigocont',
@@ -7,9 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CodigocontPage implements OnInit {
 
-  constructor() { }
+  constructor(private navCtrl:NavController) { }
 
   ngOnInit() {
   }
-
+  
+  volver(){
+    this.navCtrl.navigateForward(['/RecuperarContraseña'])
+  }
 }

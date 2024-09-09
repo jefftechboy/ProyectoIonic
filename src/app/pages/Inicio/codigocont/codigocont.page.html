@@ -6,7 +6,11 @@
 
 <ion-content [fullscreen]="true">
   <ion-list>
-    <ion-item> <ion-input label="Ingresa Codigo" placeholder="Ejemplo: 123-456" ></ion-input></ion-item>
+    <ion-item> <ion-input label="Ingresa Codigo" placeholder="Ejemplo: 123-456"></ion-input></ion-item>
   </ion-list>
   <ion-button style="margin-top: 100px;" expand="block" routerLink="/cambioContraseña">Verificar Codigo</ion-button>
 </ion-content>
+
+<div style="width: 100%;height: 100px;text-align: center;margin-top: 50px;">
+  <ion-button (click)="volver()">Volver</ion-button>
+</div>
