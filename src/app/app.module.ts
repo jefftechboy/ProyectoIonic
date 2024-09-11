@@ -5,7 +5,7 @@ import { RouteReuseStrategy } from '@angular/router';
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
-import { InformeModalModule } from './components/informe-modal/informe-modal.module'; // Importa el módulo, no el componente
+import { InformeModalModule } from './components/modulo/informe-modal/informe-modal.module'; // Importa el módulo, no el componente
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 
 @NgModule({

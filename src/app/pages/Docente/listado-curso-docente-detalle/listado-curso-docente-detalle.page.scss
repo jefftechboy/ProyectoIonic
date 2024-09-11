@@ -1,0 +1,59 @@
+.botonListadoCursoAlumno{
+    height: 50px;
+    width: 94%;
+    margin: 0 auto;
+    margin-top: 10px;
+}
+
+.botonSeccionListadoCursoAlumno {
+    margin-top: 8px;    
+}
+
+.dropdown-list {
+    width: 90%;
+    margin: 0 auto;
+    max-height: 200px; /* Ajusta la altura máxima según sea necesario */
+    overflow-y: auto; /* Habilita el scrollbar vertical si es necesario */
+}
+
+.dropdown-list::-webkit-scrollbar {
+    width: 0; /* Oculta el scrollbar en Webkit */
+    background: transparent; /* Opcional, para ocultar el fondo del scrollbar */
+  }  
+
+.cardHeader{
+    background-color: #FFD700;
+    border: 1.5px solid black;
+}
+
+
+
+
+
+
+
+
+
+.toggle-item {
+    .caret-down {
+      display: inline-block; // Muestra el ícono por defecto
+    }
+  
+    .caret-back {
+      display: none; // Oculta el ícono por defecto
+    }
+  
+    // Cuando el ítem tiene la clase 'active', cambia la visibilidad de los íconos
+    &.active {
+      .caret-down {
+        display: none;
+      }
+  
+      .caret-back {
+        display: inline-block;
+      }
+    }
+  }
+  
+  
+  

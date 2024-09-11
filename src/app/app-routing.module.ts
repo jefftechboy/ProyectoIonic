@@ -23,11 +23,7 @@ const routes: Routes = [
     path: 'RecuperarContraseña',
     loadChildren: () => import('./pages/Inicio/reccontra/reccontra.module').then( m => m.ReccontraPageModule)
   },
-  /** 
-  {
-    path: '**',
-    loadChildren: () => import('./pages/notfound/notfound.module').then( m => m.NotfoundPageModule)
-  }, **/
+
   {
     path: 'codigocont',
     loadChildren: () => import('./pages/Inicio/codigocont/codigocont.module').then( m => m.CodigocontPageModule)
@@ -73,6 +69,10 @@ const routes: Routes = [
     path: 'QrAlumnoLectura',
     loadChildren: () => import('./pages/Alumno/qr-alumno-lectura/qr-alumno-lectura.module').then( m => m.QrAlumnoLecturaPageModule)
   },
+  {
+    path: '**',
+    loadChildren: () => import('./pages/notfound/notfound.module').then( m => m.NotfoundPageModule)
+  }, 
 ];
 
 @NgModule({

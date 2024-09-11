@@ -1,24 +1,107 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Bienvenido {{usuario}}
-    </ion-title>
-  </ion-toolbar>
+<ion-menu side="end" contentId="main-content">
+  <ion-header>
+    <ion-toolbar>
+      <ion-title >{{ usuario }}</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content>
+    <div style="padding: 10px;">
+      <!-- Mostrar botones para profesores -->
+      <ng-container *ngIf="profileCode === 'profe'">
+        <ion-button class="BotonHome" expand="block" (click)="navigateAndClose('/listadoCursoDocente')">Lista Curso Docente</ion-button>
+        <ion-button class="BotonHome" expand="block" (click)="navigateAndClose('/GenerarQrDocente')">Toma de Asistencia</ion-button>
+        <ion-button class="BotonHome" expand="block" (click)="navigateAndClose('/InformesCursoDocente')">Informes Docente</ion-button>
+      </ng-container>
+  
+      <!-- Mostrar botones para alumnos -->
+      <ng-container *ngIf="profileCode === 'alum'">
+        <ion-button class="BotonHome" expand="block" (click)="navigateAndClose('/listadoCursoAlumno')">Lista Cursos Alumnos</ion-button>
+        <ion-button class="BotonHome" expand="block" (click)="navigateAndClose('/QrAlumno')">Lectura QR Alumnos</ion-button>
+      </ng-container>
+    </div>
+  </ion-content>
+  <ion-footer style="border-top: 1px solid black;height: 70px;">
+    <ion-list>
+      <ion-item >
+        <ion-grid>
+          <ion-row>
+            <ion-col size="10" id="present-alert"><h6>Cerrar Sesion</h6></ion-col>
+            <ion-col size="2"><ion-icon name="alert-circle" style="font-size: 30px;margin-top: 10px;"></ion-icon></ion-col>
+          </ion-row>
+        </ion-grid>        
+      </ion-item>
+    </ion-list>
+  </ion-footer>
+</ion-menu>
+
+
+
+<ion-alert
+  trigger="present-alert"
+  header="¿Deseas cerrar sesion?"
+  [buttons]="alertButtons"
+></ion-alert>
+
+
+
+
+<ion-header>
+  <div class="ion-page" id="main-content">
+    <ion-header>
+      <ion-toolbar>
+        <img src="../../../assets/img/logoDuoc.png" alt="">
+        <ion-buttons slot="end">
+          <ion-menu-button style="font-size: 60px; color: black;"></ion-menu-button>
+        </ion-buttons>
+      </ion-toolbar>
+    </ion-header>
+  </div>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <div style="padding: 10px;">
-    <!-- Mostrar botones para profesores -->
+  <!-- HOLA + NOMBRE + FOTO -->
+  <div style="padding-top: 100px;">
     <ng-container *ngIf="profileCode === 'profe'">
-      <ion-button expand="block" routerLink="/listadoCursoDocente">Lista Curso Docente</ion-button>
-      <ion-button expand="block" routerLink="/GenerarQrDocente">Generar QR Docente</ion-button>
-      <ion-button expand="block" routerLink="/InformesCursoDocente">Informes Docente</ion-button>
+      <h1 style="text-align: center;">BIENVENIDO DOCENTE</h1>
     </ng-container>
-
-    <!-- Mostrar botones para alumnos -->
     <ng-container *ngIf="profileCode === 'alum'">
-      <ion-button expand="block" routerLink="/listadoCursoAlumno">Lista Cursos Alumnos</ion-button>
-      <ion-button expand="block" routerLink="/QrAlumno">Lectura QR Alumnos</ion-button>
+      <h1 style="text-align: center;">BIENVENIDO ALUMNO</h1>
     </ng-container>
+    <h5 style="text-align: center;">
+      {{ usuario }}
+    </h5>
+    <div class="fotoPerfil2">
+      <img src="https://w7.pngwing.com/pngs/312/283/png-transparent-man-s-face-avatar-computer-icons-user-profile-business-user-avatar-blue-face-heroes-thumbnail.png"
+      alt="Imagen"
+      class="fotoPerfil">
+    </div>
   </div>
+  <!-- DATOS DEL DIAS -->
+   <div style="margin-top: 30px;">
+    <ion-list>
+      <ion-item>
+        <ion-grid>
+          <ion-row style="text-align: center;">
+            <ion-col style="background-color: #FFB800; border-radius: 50px;" class="tituloClasesHome1" >Clases del dia</ion-col>
+            <ion-col style="text-align: center;" class="conteoClasesHome">7</ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-item>
+      <ion-item>
+        <ion-grid>
+          <ion-row style="text-align: center;">
+            <ion-col style="background-color: #43B02A; border-radius: 50px;" class="tituloClasesHome2">Clases asistidas</ion-col>
+            <ion-col class="conteoClasesHome">0</ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-item><ion-item>
+        <ion-grid>
+          <ion-row style="text-align: center;">
+            <ion-col style="background-color: #D50032; border-radius: 50px;" class="tituloClasesHome3">Clase en proceso</ion-col>
+            <ion-col class="conteoClasesHome">Aplicaciones Moviles</ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-item>
+    </ion-list>
+   </div>
 </ion-content>

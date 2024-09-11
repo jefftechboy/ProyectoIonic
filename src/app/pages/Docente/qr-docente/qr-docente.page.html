@@ -1,37 +1,47 @@
-<ion-header [translucent]="true">
-  <ion-toolbar style="background-color: #003366;">
-    <ion-title style="color: #FFD700;">Generar QR Docencia</ion-title>
-  </ion-toolbar>
+<ion-header>
+  <ion-grid>
+    <ion-row style="background-color: #1A1A1A;" >
+      <ion-col size="2">
+        <ion-button routerLink="/home" class="BotonRegreso">
+          <
+        </ion-button>
+      </ion-col>  
+      <ion-col size="10">
+        <h2 style="text-align: left; color: white;" >Toma de Asistencia</h2>
+      </ion-col>  
+    </ion-row>
+  </ion-grid>
 </ion-header>
-
 <ion-content [fullscreen]="true" class="ion-padding" style="background-color: #FFFFFF;">
-  <ion-card>
+  <ion-card style="background-color: #003366;width: 100%; margin:0 auto" >
     <ion-card-header>
-      <ion-card-title class="ion-text-center" style="color: #003366;">Asignatura en Proceso</ion-card-title>
+      <ion-card-title class="ion-text-center" style="color: #ffffff;">
+        <h1>
+          Asignatura en Proceso
+        </h1>
+      </ion-card-title>
     </ion-card-header>
 
     <ion-card-content>
-      <p class="ion-text-center" style="color: #003366;">Clase en proceso</p>
-      <ion-button expand="full" style="--background: #FFD700; --color: #003366;" class="ion-margin-top">
-        Asignatura Sección Horario
+      <h1 style="text-align: center;color:white " >
+        Aplicaciones Moviles
+      </h1>
+      <ion-button expand="full" class="botonHorarioClase">
+        <h2>
+          Lunes: 08:30 - 09:50
+        </h2>
       </ion-button>
     </ion-card-content>
   </ion-card>
 
   <ion-card class="ion-text-center">
-    <ion-card-header>
-      <ion-card-title style="color: #003366;">Generar Código QR</ion-card-title>
-    </ion-card-header>
-
     <ion-card-content>
-      <ion-button expand="block" style="--background: #FFD700; --color: #003366;" routerLink="/generarQrDocente">
-        Generar QR
+      <ion-button expand="block" style="--background: #1A1A1A; --color: white;" 
+        routerLink="/generarQrDocente">
+        <h1>
+          Generar QR
+        </h1>
       </ion-button>
     </ion-card-content>
   </ion-card>
-  <footer>
-    <ion-button expand="medium" style="--background: #FFD700; --color: #003366;" class="ion-margin-top" routerLink="1">
-      <strong>Volver</strong>
-    </ion-button>
-  </footer>
 </ion-content>

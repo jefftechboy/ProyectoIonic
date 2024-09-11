@@ -1,36 +1,106 @@
-<ion-header [translucent]="true">
-  <ion-toolbar style="background-color: #003366;">
-    <ion-title style="color: #FFD700;">Detalles del Curso</ion-title>
-  </ion-toolbar>
+<ion-header>
+  <ion-grid>
+    <ion-row style="background-color: #1A1A1A;" >
+      <ion-col size="2">
+        <ion-button routerLink="/listadoCursoDocente" 
+              class="BotonRegreso">
+          <
+        </ion-button>
+      </ion-col>  
+      <ion-col size="10">
+        <h2 style="text-align: left;" >Applicaciones Moviles</h2>
+      </ion-col>  
+    </ion-row>
+  </ion-grid>
 </ion-header>
 
-<ion-content [fullscreen]="true" class="ion-padding" style="background-color: #FFFFFF;">
-  <ion-card>
-    <ion-card-header>
-      <ion-card-title style="color: #003366;">Asignatura: Aplicacion Movil</ion-card-title>
-      <ion-card-subtitle style="color: #FFD700;">Código: 52231</ion-card-subtitle>
-    </ion-card-header>
-
-    <ion-card-content>
-      <ion-item>
+<ion-content [fullscreen]="true" >
+  <ion-list style="margin-bottom: 20px;margin-top: 10px;">
+    <ion-item>
+      <ion-label>
+        <ion-grid  class="cardHeader">
+          <ion-row>
+            <ion-col size="12" style="text-align: center;">
+              <h1>Freddy Campos</h1>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col size="6">
+              <p style="font-weight: bold;" >
+                Miercoles 8:30-09:50
+              </p>
+            </ion-col>
+            <ion-col size="6">
+              <p  style="font-weight: bold;">
+                Viernes 08:30-10:40
+              </p>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col size="6">
+              <h5>
+                PA_ASY4131
+              </h5>
+            </ion-col>
+            <ion-col size="3">
+              <h5>
+                012D
+              </h5>
+            </ion-col>
+            <ion-col size="3">
+              <h5>
+                87%
+              </h5>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+  
+  <ion-list *ngFor="let dropdownState of dropdownStates; let i = index" 
+      style="margin-top: 0px;">
+      <ion-item (click)="toggleDropdown(i)" 
+        style="border-top: 1px solid black;">
         <ion-label>
-          <h2 style="color: #003366;"><strong>Sección: 012D</strong></h2>
-          <p style="color: #f7f4f4;">Horario: Lunes y Miércoles, 10:00 - 12:00</p>
-          <p style="color: #f7f4f4;">Profesor: Nombre del Profesor</p>
-          <p style="color: #f7f4f4;">Número de Alumnos: 30</p>
+          <ion-grid expand = "block">
+            <ion-row>
+              <ion-col size="8">
+                <h5>
+                  Alumno {{i + 1}}
+                </h5>
+              </ion-col>
+              <ion-col size="3" style="text-align: right;" >
+                <h5 style="text-align: center;">
+                  {{ i + 75 }}%
+                </h5>
+              </ion-col>
+              <ion-col size="1">
+                <ion-icon name="add-circle" style="font-size: 20px;"></ion-icon>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
         </ion-label>
       </ion-item>
-      
 
-      <ion-button expand="full" style="--background: #FFD700; --color: #003366;" class="ion-margin-top" routerLink="/listAsisTomada">
-        <strong>Ver Lista de Asistencia</strong>
-      </ion-button>
-    </ion-card-content>
-    </ion-card>
-    <footer>
-      <ion-button expand="medium" style="--background: #FFD700; --color: #003366;" class="ion-margin-top" routerLink="/listadoCursoDocente">
-        <strong>Volver</strong>
-      </ion-button>
-    </footer>
+      <ion-list *ngIf="dropdownState" expand = "block" class="dropdown-list" >
+          <ion-item *ngFor="let item of itemsDropdowns[i], let i = index">
+            <ion-grid>
+              <ion-row>
+                <ion-col size="7">{{10 + i}}/9</ion-col>
+                <ion-col size="1"></ion-col>
+                <ion-col size="4" *ngIf="item == 'Presente', else Ausente " >
+                  <p style="color: green;">{{ item }}</p>
+                </ion-col>
+                <ng-template #Ausente>
+                  <p style="color: red;">{{ item }}</p>
+                </ng-template>
+              </ion-row>
+            </ion-grid>
+          </ion-item>
+      </ion-list>
+  </ion-list>
+
+
 </ion-content>
 

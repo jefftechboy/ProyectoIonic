@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-qr-docente-lectura',
@@ -10,10 +11,10 @@ export class QrDocenteLecturaPage {
   intervalo: any;
   temporizadorIniciado: boolean = false;
 
-  constructor() { }
-
+  constructor(private navController: NavController) { }
+  
   iniciarTemporizador() {
-    this.tiempoRestante = 300; // 300 segundos (5 minutos)
+    this.tiempoRestante = 10; // 300 segundos (5 minutos)
     this.temporizadorIniciado = true;
 
     // Inicia el temporizador, se ejecuta cada 1 segundo
@@ -23,6 +24,7 @@ export class QrDocenteLecturaPage {
       } else {
         clearInterval(this.intervalo); // Detener el temporizador cuando llegue a 0
         this.temporizadorIniciado = false;
+        this.navController.navigateForward('/listAsisTomada');
       }
     }, 1000);
   }
@@ -32,5 +34,8 @@ export class QrDocenteLecturaPage {
     const minutos = Math.floor(this.tiempoRestante / 60);
     const segundos = this.tiempoRestante % 60;
     return `${minutos}:${segundos < 10 ? '0' : ''}${segundos}`;
+  }
+  ngOnInit() {
+    this.iniciarTemporizador();
   }
 }

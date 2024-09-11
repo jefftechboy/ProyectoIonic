@@ -1,31 +1,47 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title style="text-align: center;">Asistencia Alumno</ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content [fullscreen]="true" style="text-align: center;">
-  <ion-card>
+  <ion-grid>
+    <ion-row style="background-color: #1A1A1A;" >
+      <ion-col size="2">
+        <ion-button routerLink="/home" 
+              style="--background: #FFB800; --color: #ffffff;">
+          <
+        </ion-button>
+      </ion-col>  
+      <ion-col size="10">
+        <h2 style="text-align: left;color: white;" >Asistencia por Asignaturas</h2>
+      </ion-col>  
+    </ion-row>
+  </ion-grid>
+
+
+  <ion-card  style="margin-top: 30px;"  class="cartaClaseEnProceso" >
     <ion-card-header>
-      <ion-card-title>REGISTRO DE ASISTENCIA</ion-card-title>
-      <h2>CLASE ACTUAL EN CURSO </h2>
-      <ion-button style="pointer-events: none;" > 
-        <ion-grid>
-          <ion-row>
-            <ion-col size="6">Arquitectura</ion-col>
-            <ion-col size="2">009D</ion-col>
-            <ion-col size="4">Lunes 8:31-09:50</ion-col>
-          </ion-row>
-        </ion-grid>
-      </ion-button>
+      <ion-card-title>
+        <h1 class="TextoClaseProcesoTitulos">
+          Asignatura en Proceso
+        </h1>
+      </ion-card-title>
     </ion-card-header>
-  
 
-
-    <ion-button (click)="presentAlert()">Leer QR</ion-button>
-
-
-
+    <ion-card-content>
+      <h1   class="TextoClaseProcesoTitulos" >
+        Aplicaciones Moviles
+      </h1>
+      <ion-button class="botonHorarioClase">
+        <h2>
+          Lunes: 08:30 - 09:50
+        </h2>
+      </ion-button>
+    </ion-card-content>
   </ion-card>
+  <ion-button  class="botonLecturaQrAlumno" expand="block"
+      (click)="presentAlert()">
+    <h1>
+      Leer QR
+    </h1>
+  </ion-button>
+
+
+
 </ion-content>
 

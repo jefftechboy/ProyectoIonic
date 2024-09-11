@@ -1,0 +1,16 @@
+<ion-header>
+  <ion-toolbar  style="--background: #FFB800; --color: #003366;" class="HeaderModalInforme" >
+    <ion-title style="text-align: center;">DESCARGA INFORME</ion-title>
+    <ion-buttons slot="end">
+      <ion-button  style=" --color: black;" (click)="dismiss()">Cerrar</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list style="background-color: aliceblue;" >
+    <ion-item button (click)="showAlerts()">Generar en formato PDF</ion-item>
+    <ion-item button (click)="showAlerts()">Generar en formato Excel</ion-item>
+    <ion-item button (click)="showAlerts()">Enviar por Correo</ion-item>
+  </ion-list>
+</ion-content>

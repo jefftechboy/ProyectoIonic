@@ -1,52 +1,85 @@
-<ion-header [translucent]="false">
-  <ion-toolbar style="background-color: #003366 !important;">
-    <ion-title style="color: #FFD700 !important;">Listado de Cursos</ion-title>
-  </ion-toolbar>
+<ion-header>
+  <ion-grid>
+    <ion-row style="background-color: #1A1A1A;" >
+      <ion-col size="2">
+        <ion-button routerLink="/home" class="BotonRegreso">
+          <
+        </ion-button>
+      </ion-col>  
+      <ion-col size="10">
+        <h2 style="text-align: left; color: white;" >Asistencias Asignaturas</h2>
+      </ion-col>  
+    </ion-row>
+  </ion-grid>
 </ion-header>
 
-<ion-content [fullscreen]="true" class="ion-padding" style="background-color: #FFFFFF;">
-  <ion-title size="medium" class="ion-text-center" style="color: #003366;"><strong>Cursos Asignados</strong></ion-title>
-  <br>
+<ion-content [fullscreen]="true"  style="color: white">
+  <ion-list>
+  
+    <ion-item 
+      class="asistenciaAsignaturasItems"
+      size="large" 
+      expand="block" 
+      style="border-bottom: 1px solid black; --color: #1A1A1A;" 
+      routerLink="/listCurDocDetalle">
+      <ion-label>
+        <ion-grid>
+          <ion-row>
+            <ion-col size="9" >Applicaciones Moviles</ion-col>
+            <ion-col size="3">012D</ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-label>
+    </ion-item>
+    <ion-item 
+      class="asistenciaAsignaturasItems"
+      size="large" 
+      expand="full" 
+      style="border-bottom: 1px solid black; --color: #1A1A1A;" 
+      routerLink="/listCurDocDetalle">
+      <ion-label>
+        <ion-grid>
+          <ion-row>
+            <ion-col size="9" >Arquitectura</ion-col>
+          <ion-col size="3">007D</ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-label>
+    </ion-item>
+    <ion-item 
+      class="asistenciaAsignaturasItems"
+      size="large" 
+      expand="full" 
+      style="border-bottom: 1px solid black; --color: #1A1A1A;" 
+      routerLink="/listCurDocDetalle">
+      <ion-label>
+        <ion-grid>
+          <ion-row>
+            <ion-col size="9" >Arquitectura</ion-col>
+          <ion-col size="3">008D</ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-label>
+    </ion-item>
+    <ion-item 
+      class="asistenciaAsignaturasItems"
+      size="large" 
+      expand="full" 
+      style="border-bottom: 1px solid black; --color: #1A1A1A;" 
+      routerLink="/listCurDocDetalle">
+      <ion-label>
+        <ion-grid>
+          <ion-row>
+            <ion-col size="9" >Calidad de Software</ion-col>
+            <ion-col size="3">0012D</ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-label>
+    </ion-item>
 
-  <ion-button 
-    size="large" 
-    expand="full" 
-    style="--background: #FFD700; --color: #003366; margin-top: 15px;" 
-    routerLink="/listCurDocDetalle">
-    App Movil / 012D / 10:00-12:00 
-  </ion-button>
+    
 
-  <ion-button 
-    size="large" 
-    expand="full" 
-    style="--background: #FFD700; --color: #003366; margin-top: 15px;">
-    Asignatura Sección Horario
-  </ion-button>
 
-  <ion-button 
-    size="large" 
-    expand="full" 
-    style="--background: #FFD700; --color: #003366; margin-top: 15px;">
-    Asignatura Sección Horario
-  </ion-button>
+  </ion-list>
 
-  <ion-button 
-    size="large" 
-    expand="full" 
-    style="--background: #FFD700; --color: #003366; margin-top: 15px;">
-    Asignatura Sección Horario
-  </ion-button>
-
-  <ion-button 
-    size="large" 
-    expand="full" 
-    style="--background: #FFD700; --color: #003366; margin-top: 15px;">
-    Asignatura Sección Horario
-  </ion-button>
-
-  <footer>
-    <ion-button expand="medium" style="--background: #FFD700; --color: #003366;" class="ion-margin-top" routerLink="1">
-      <strong>Volver</strong>
-    </ion-button>
-  </footer>
 </ion-content>

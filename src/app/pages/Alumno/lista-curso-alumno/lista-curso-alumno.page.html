@@ -1,35 +1,51 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>Listado de cursos</ion-title>
-  </ion-toolbar>
+<ion-header>
+  <ion-grid>
+    <ion-row style="background-color: #1A1A1A;" >
+      <ion-col size="2">
+        <ion-button routerLink="/home" 
+              style="--background: #FFB800; --color: #ffffff;">
+          <
+        </ion-button>
+      </ion-col>  
+      <ion-col size="10">
+        <h2 style="text-align: left;color: white;" >Asistencia Asignaturas</h2>
+      </ion-col>  
+    </ion-row>
+  </ion-grid>
 </ion-header>
 <ion-content [fullscreen]="true">
-  <div class="content">
-    <div *ngFor="let dropdownState of dropdownStates; let i = index">
-      <ion-button class="botonListadoCursoAlumno" (click)="toggleDropdown(i)" expand="block">
+  <div expand="block" *ngFor="let dropdownState of dropdownStates; let i = index">
+    <ion-list> 
+      <ion-item (click)="toggleDropdown(i)" expand="block" 
+          style="border-bottom: 1px solid black;">
         <ion-grid>
           <ion-row>
-            <ion-col size="8">Asignatura {{ i + 1 }}</ion-col>
-            <ion-col size="1"></ion-col>
-            <ion-col size="3">Seccion</ion-col>
+            <ion-col size="6">Asignatura {{ i + 1 }}</ion-col>
+            <ion-col size="3">0{{ i + 10 }}D</ion-col>
+            <ion-col size="2">{{ i + 68 }}%</ion-col>
+            <ion-col size="1">
+              <ion-icon name="add-circle" style="font-size: 20px;"></ion-icon>
+            </ion-col>
           </ion-row>
         </ion-grid>
-      </ion-button>
-
-      <div *ngIf="dropdownState" class="dropdown-list">
-        <ion-list>
-          <ion-item *ngFor="let item of itemsDropdowns[i]">
-            <ion-grid>
-              <ion-row>
-                <ion-col size="6">Dia/Hora</ion-col>
-                <ion-col size="2"></ion-col>
-                <ion-col size="4">{{ item }}</ion-col>
-              </ion-row>
-            </ion-grid>
-          </ion-item>
-        </ion-list>
-      </div>
-    </div>
+      </ion-item>
+    </ion-list>
+    <ion-list *ngIf="dropdownState" class="dropdown-list">
+        <ion-item *ngFor="let item of itemsDropdowns[i]">
+          <ion-grid>
+            <ion-row>
+              <ion-col size="7">{{10 + i}}/9</ion-col>
+              <ion-col size="1"></ion-col>
+              <ion-col size="4" *ngIf="item == 'Presente', else Ausente " >
+                <p style="color: green;">{{ item }}</p>
+              </ion-col>
+              <ng-template #Ausente>
+                <p style="color: red;">{{ item }}</p>
+              </ng-template>
+            </ion-row>
+          </ion-grid>
+        </ion-item>
+    </ion-list>
   </div>
 </ion-content>
 

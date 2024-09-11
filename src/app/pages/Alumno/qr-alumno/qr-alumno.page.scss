@@ -1,3 +1,25 @@
-ion-content {
-  --background: black; /* Reemplaza con el color que desees */
+.cartaClaseEnProceso{
+  background-color: #FFB800;
+  margin-top: 20px;
+  width: 90%; 
+  margin:0 auto;
+  color: #003366;
+}
+.botonHorarioClase{
+  --background: #1A1A1A;
+  color: white;
+  margin-top: 30px;
+}
+.botonLecturaQrAlumno{
+  --background: #003366; 
+  --color: white;
+  width: 80%;
+  margin: 0 auto;
+  margin-top: 20px;
+  height: 30px;
+}
+.TextoClaseProcesoTitulos{
+  text-align: center;
+  color:#003366;
+  font-weight: bold; 
 }

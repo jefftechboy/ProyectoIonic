@@ -1,12 +1,17 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>Codigo Contraseña</ion-title>
+    <img src="../../../assets/img/logoDuoc.png" alt="">
   </ion-toolbar>
 </ion-header>
 
+
 <ion-content [fullscreen]="true">
-  <ion-list>
-    <ion-item> <ion-input label="Ingresa Codigo" placeholder="Ejemplo: 123-456" ></ion-input></ion-item>
+  <ion-list  style="margin-top: 30px;">
+    <ion-item> 
+        <ion-input class="loginItem" label="Ingresa el codigo" placeholder="Ejemplo: 123-456" ></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-button expand="block"  class="login" routerLink="/cambioContraseña">Verificar Codigo</ion-button>
+    </ion-item>
   </ion-list>
-  <ion-button style="margin-top: 100px;" expand="block" routerLink="/cambioContraseña">Verificar Codigo</ion-button>
 </ion-content>
