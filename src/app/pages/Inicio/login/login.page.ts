@@ -1,7 +1,49 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,ChangeDetectionStrategy,signal } from '@angular/core';
 import { AlertController } from '@ionic/angular';
 import { NavController } from '@ionic/angular';
 import { User } from 'src/app/model/User';
+import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { IonicModule } from '@ionic/angular';
+import { AppComponent } from 'src/app/app.component';
+import { AppRoutingModule } from 'src/app/app-routing.module';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+
+
+
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { LoginPageRoutingModule } from './login-routing.module';
+
+
+
+
+
+
+
+
+
+
+
+@NgModule({
+  declarations: [],
+  imports: [
+    BrowserModule,
+    IonicModule.forRoot(),
+    AppRoutingModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule,
+    MatIconModule,
+  ],
+  providers: [],
+  bootstrap: [AppComponent]
+})
+export class AppModule {}
+
 
 @Component({
   selector: 'app-login',
@@ -13,6 +55,15 @@ export class LoginPage implements OnInit {
   constructor(private alertController: AlertController,
     private navCtrl: NavController
   ) { }
+  
+  hide = true; // Esta es una propiedad
+
+  clickEvent(event: MouseEvent) {
+    this.hide = !this.hide;
+    event.stopPropagation();
+  }
+
+
 
   nombre:string=''
   password:string=''

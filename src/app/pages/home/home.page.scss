@@ -11,7 +11,30 @@
   justify-content: center; /* Centra horizontalmente */
 }
 
-.BotonHome{
-  background-color: #FFD700;
-  border-radius: 20px;
+#BotonHome{
+  --background: #FFD700;
+  border-bottom: 0.1px solid #1A1A1A;
+}
+#cabezeraMenu{
+  --background: #1A1A1A;
+  color: white;
+}
+.NombreUsuario{
+  --max-width: 100%;
+  text-align: left;
+  font-size: 25px;
+  padding: 0%;
+  margin-left:15px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+#CuerpoMenu{
+  border-left: 1px solid black;
+}
+#PieMenu{
+  border-top: 1px solid black;
+  border-left: 1px solid black;
+  height: 70px;
+}
+#MenuCompleto{
+  --max-width: 220px;
 }

@@ -5,11 +5,35 @@
     align-items: center; /* Opcional: centra verticalmente si es necesario */
     margin: 0 auto;
 }
-.LogoApp{
-    height: 200px;
-    height: 200px;
+
+
+.loader {
+    width: 80px;
+    aspect-ratio: 1;
     display: flex;
     justify-content: center; /* Centra horizontalmente */
     align-items: center; /* Opcional: centra verticalmente si es necesario */
     margin: 0 auto;
-}
+    margin-top: 130px;
+    background: 
+      linear-gradient(45deg,#FFD700 50%,#ffffff00 0),
+      linear-gradient(45deg,#ffffff00 50%,#FFD700 0),
+      linear-gradient(-45deg,#003366 50%,#ffd90000 0),
+      linear-gradient(-45deg,#0000 50%,#003366 0),
+      linear-gradient(#1A1A1A 0 0);
+    background-size: 50% 50%;
+    background-repeat: no-repeat;
+    animation: l18 2.5s infinite;
+    
+  }
+  @keyframes l18{
+    0%   {background-position:50% 50%,50% 50%,50%  50% ,50% 50%,50% 50%}
+    25%  {background-position:0  100%,100%  0,50%  50% ,50% 50%,50% 50%}
+    50%  {background-position:0  100%,100%  0,100% 100%,0   0  ,50% 50%}
+    75%  {background-position:50% 50%,50% 50%,100% 100%,0   0  ,50% 50%}
+    100% {background-position:50% 50%,50% 50%,50%  50% ,50% 50%,50% 50%}
+  }
+
+
+
+  

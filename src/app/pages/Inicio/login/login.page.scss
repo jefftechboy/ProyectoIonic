@@ -1,5 +1,12 @@
-
-// Botonoes Ingresos
+.TituloBienvenido{
+  text-align: center;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  font-size: 40px;
+  font-family:  ARIAL;
+  font-weight: bold;
+}
+// BOTONES 
 .login {
   margin-bottom: 10px;
   width: 75%;
@@ -8,18 +15,13 @@
   margin-top: 20px;
   justify-content: center; /* Centra horizontalmente */
 }
-//Caja del formulario
-.login2 {
-  width: 70%;
+// INGRESO USUARIO
+#IngresoUsuario{
+  width: 90%;
   margin: 0 auto;
-  margin-top: 20px;
-  font-weight: bold;
 }
-
-//Inputs
-.loginItem{
-  --inner-border-width: 0;
-  border-bottom: 1px solid black; 
-  opacity: 0.8;
-  margin-bottom: 10px;     /* Espacio entre elementos */
+// INGRESO CONTRASEÑA
+#IngresoContraseña{
+  width: 90%;
+  margin: 0 auto;
 }

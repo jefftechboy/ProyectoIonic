@@ -1,30 +1,33 @@
-<ion-menu side="end" contentId="main-content">
+<!-- Menu de barra lateral  -->
+<ion-menu side="end" contentId="main-content" id="MenuCompleto">
+  <!-- Cabezera del menu -->
   <ion-header>
-    <ion-toolbar>
-      <ion-title >{{ usuario }}</ion-title>
+    <ion-toolbar id="cabezeraMenu" >
+      <ion-title class="NombreUsuario" >{{ usuario }}</ion-title>
     </ion-toolbar>
   </ion-header>
-  <ion-content>
-    <div style="padding: 10px;">
-      <!-- Mostrar botones para profesores -->
-      <ng-container *ngIf="profileCode === 'profe'">
-        <ion-button class="BotonHome" expand="block" (click)="navigateAndClose('/listadoCursoDocente')">Lista Curso Docente</ion-button>
-        <ion-button class="BotonHome" expand="block" (click)="navigateAndClose('/GenerarQrDocente')">Toma de Asistencia</ion-button>
-        <ion-button class="BotonHome" expand="block" (click)="navigateAndClose('/InformesCursoDocente')">Informes Docente</ion-button>
-      </ng-container>
-  
-      <!-- Mostrar botones para alumnos -->
-      <ng-container *ngIf="profileCode === 'alum'">
-        <ion-button class="BotonHome" expand="block" (click)="navigateAndClose('/listadoCursoAlumno')">Lista Cursos Alumnos</ion-button>
-        <ion-button class="BotonHome" expand="block" (click)="navigateAndClose('/QrAlumno')">Lectura QR Alumnos</ion-button>
-      </ng-container>
-    </div>
+  <!-- Cuerpo del menu -->
+  <ion-content id="CuerpoMenu">
+    <ion-list>
+      <div *ngIf="profileCode === 'profe'" class="container-fluid">
+        <ion-item id="BotonHome" expand="block" (click)="navigateAndClose('/listadoCursoDocente')">Lista Curso Docente</ion-item>
+        <ion-item id="BotonHome" expand="block" (click)="navigateAndClose('/InformesCursoDocente')">Informes Docente</ion-item>
+        <ion-item id="BotonHome" expand="block" (click)="navigateAndClose('/GenerarQrDocente')">Toma de Asistencia</ion-item>          
+      </div>
+        <!-- Mostrar botones para alumnos -->
+        <div *ngIf="profileCode === 'alum'">
+          <ion-item id="BotonHome" expand="block" (click)="navigateAndClose('/listadoCursoAlumno')">Lista Cursos Alumnos</ion-item>
+          <ion-item id="BotonHome" expand="block" (click)="navigateAndClose('/QrAlumno')">Lectura QR Alumnos</ion-item>
+        </div>
+    </ion-list>
   </ion-content>
-  <ion-footer style="border-top: 1px solid black;height: 70px;">
+  <!-- Pie del menu -->
+  <ion-footer  id="PieMenu">
     <ion-list>
       <ion-item >
         <ion-grid>
           <ion-row>
+            <!-- Cerrar session -->
             <ion-col size="10" id="present-alert"><h6>Cerrar Sesion</h6></ion-col>
             <ion-col size="2"><ion-icon name="alert-circle" style="font-size: 30px;margin-top: 10px;"></ion-icon></ion-col>
           </ion-row>
@@ -35,7 +38,7 @@
 </ion-menu>
 
 
-
+<!-- alerta de cerrar session -->
 <ion-alert
   trigger="present-alert"
   header="¿Deseas cerrar sesion?"

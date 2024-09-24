@@ -5,26 +5,43 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <h1 style="text-align: center;margin-top: 60px;font-size: 40px; font-weight: bold;">Bienvenido</h1>
-  <div class="login2">
+  <!-- Titulo Bienvenido -->
+  <h1 class="TituloBienvenido">Bienvenido</h1>
     <ion-list>
-      <ion-item  class="loginItem" >
-          <ion-input 
-            placeholder="Usuario"
-            [(ngModel)]="nombre"
-            (keydown)="handleKeyDown($event)"
-          ></ion-input>
+      <ion-item>
+          <!-- Caja de ingreso de usuario -->
+          <mat-form-field appearance="fill"  id="IngresoUsuario" >
+            <!-- texto previsual -->
+            <mat-label>Ingresa tu usuario</mat-label>
+            <!-- input -->
+            <input matInput placeholder="ejemplo@duocuc.cl"  [(ngModel)]="nombre" (keydown)="handleKeyDown($event)" >
+            <!-- icono de email -->
+            <mat-icon matSuffix>email</mat-icon>
+          </mat-form-field>
       </ion-item>
-      <ion-item  class="loginItem">
-          <ion-input  
-            type="password"
-            placeholder="Contraseña"
-            [(ngModel)]="password"
-            (keydown)="handleKeyDown($event)">
-          </ion-input>
+      <ion-item>
+        <!-- Caja de ingreso de contraseña -->
+        <mat-form-field appearance="fill"  id="IngresoContraseña">
+          <!-- texto previsual -->
+          <mat-label>Ingresa tu contraseña</mat-label>
+          <!-- input -->
+          <input  matInput [type]="hide ? 'password' : 'text'" [(ngModel)]="password" (keydown)="handleKeyDown($event)" />
+          <!-- Boton de revelar contraseña -->
+          <button
+            mat-icon-button
+            matSuffix
+            (click)="clickEvent($event)"
+            [attr.aria-label]="'Hide password'"
+            [attr.aria-pressed]="hide">
+            <!-- icono de ojo -->
+            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+          </button>
+        </mat-form-field>
       </ion-item>
+
     </ion-list>
+    <!-- Boton iniciar sesion -->
     <ion-button class="login"  expand="block" (click)="validar()">Iniciar sesión</ion-button>
+    <!-- Boton recuperar contraseña -->
     <ion-button  class="login" expand="block" routerLink="/RecuperarContraseña">Recuperar Contraseña</ion-button>
-  </div>
 </ion-content>
