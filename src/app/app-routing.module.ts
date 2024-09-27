@@ -68,11 +68,15 @@ const routes: Routes = [
   {
     path: 'QrAlumnoLectura',
     loadChildren: () => import('./pages/Alumno/qr-alumno-lectura/qr-alumno-lectura.module').then( m => m.QrAlumnoLecturaPageModule)
+  },   {
+  path: 'crudpersona',
+  loadChildren: () => import('./pages/crudpersona/crudpersona.module').then( m => m.CrudpersonaPageModule)
   },
   {
     path: '**',
     loadChildren: () => import('./pages/notfound/notfound.module').then( m => m.NotfoundPageModule)
-  }, 
+  },
+
 ];
 
 @NgModule({
