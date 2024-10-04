@@ -9,7 +9,7 @@ export class CrudApiService {
 
   constructor(private http:HttpClient) { }
 
-  rutaapi = "http://127.0.0.1:8000/api/usuario/"
+  rutaapi = "https://jefftechboy.pythonanywhere.com/api/usuario/"
 
   getPersona():Observable<any>{
     return this.http.get(this.rutaapi).pipe(retry(3))

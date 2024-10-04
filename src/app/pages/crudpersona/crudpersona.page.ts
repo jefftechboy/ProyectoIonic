@@ -3,6 +3,7 @@ import { Persona } from 'src/app/model/Persona';
 import { CrudpersonaService } from 'src/app/servicios/crudpersona.service';
 import { CrudApiService } from 'src/app/servicios/crud-api.service';
 import { HttpClientModule } from '@angular/common/http';
+import { ToastController } from '@ionic/angular';
 @Component({
   selector: 'app-crudpersona',
   templateUrl: './crudpersona.page.html',
@@ -10,7 +11,7 @@ import { HttpClientModule } from '@angular/common/http';
 })
 export class CrudpersonaPage implements OnInit {
 
-  constructor(public cp:CrudpersonaService, public crud:CrudApiService) { }
+  constructor(public cp:CrudpersonaService, public crud:CrudApiService, public tc:ToastController) { }
 
   persona:Persona={nombre:'',apellido:''};
   nueva_persona:Persona={id:'',nombre:'',apellido:''};
@@ -21,7 +22,13 @@ export class CrudpersonaPage implements OnInit {
   ngOnInit() {
     this.listar();
   }
-
+  async mensaje(texto:string){
+    const toast = await this.tc.create({
+      message: texto,
+      duration:1000,
+    });
+    await toast.present()
+  }
   modificar(persona:Persona){
     this.nueva_persona= persona;
     
@@ -63,7 +70,7 @@ export class CrudpersonaPage implements OnInit {
 
   grabar(){
     this.cp.grabar(this.persona).then(()=>{
-      alert("Grabo")
+      this.mensaje("grabo")
     }).catch((err)=>{
       console.log(err)
     })
