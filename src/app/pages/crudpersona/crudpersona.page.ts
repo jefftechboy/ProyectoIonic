@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Persona } from 'src/app/model/Persona';
 import { CrudpersonaService } from 'src/app/servicios/crudpersona.service';
-
+import { CrudApiService } from 'src/app/servicios/crud-api.service';
+import { HttpClientModule } from '@angular/common/http';
 @Component({
   selector: 'app-crudpersona',
   templateUrl: './crudpersona.page.html',
@@ -9,7 +10,7 @@ import { CrudpersonaService } from 'src/app/servicios/crudpersona.service';
 })
 export class CrudpersonaPage implements OnInit {
 
-  constructor(private cp:CrudpersonaService) { }
+  constructor(public cp:CrudpersonaService, public crud:CrudApiService) { }
 
   persona:Persona={nombre:'',apellido:''};
   nueva_persona:Persona={id:'',nombre:'',apellido:''};
@@ -45,6 +46,14 @@ export class CrudpersonaPage implements OnInit {
     })
   }
 
+
+  recuperar(){
+    this.crud.getPersona().subscribe(
+      (any)=>{
+        console.log(any)
+      }
+    )
+  }
 
   listar(){
     this.cp.listarTodo().subscribe(data=>{

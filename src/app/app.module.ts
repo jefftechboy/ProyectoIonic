@@ -10,7 +10,7 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import { environment } from 'src/environments/environment.prod';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { AngularFireModule} from '@angular/fire/compat'
-
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [AppComponent],  // Elimina la declaración de InformeModalComponent
@@ -21,6 +21,7 @@ import { AngularFireModule} from '@angular/fire/compat'
     InformeModalModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFirestoreModule,
+    HttpClientModule,
   ],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, provideAnimationsAsync()],
   bootstrap: [AppComponent],
