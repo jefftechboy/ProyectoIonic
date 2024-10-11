@@ -76,7 +76,14 @@ export class CrudpersonaPage implements OnInit {
     })
   }
 
-  
-  
+  asignaturas: any[] = [];
+  nombreBuscado: string = '';
 
+  buscarAsignaturas() {
+    this.cp.buscarAsignaturasPorNombre(this.nombreBuscado).subscribe(data => {
+      this.asignaturas = data;
+    }, error => {
+      console.error('Error al buscar asignaturas: ', error);
+    });
+  }
 }
