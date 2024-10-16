@@ -13,41 +13,36 @@
     </ion-row>
   </ion-grid>
 </ion-header>
-<ion-content [fullscreen]="true">
-  <div expand="block" *ngFor="let dropdownState of dropdownStates; let i = index">
-    <ion-list> 
-      <ion-item (click)="toggleDropdown(i)" expand="block" 
-          style="border-bottom: 1px solid black;">
-        <ion-grid>
-          <ion-row>
-            <ion-col size="6">Asignatura {{ i + 1 }}</ion-col>
-            <ion-col size="3">0{{ i + 10 }}D</ion-col>
-            <ion-col size="2">{{ i + 68 }}%</ion-col>
-            <ion-col size="1">
-              <ion-icon name="add-circle" style="font-size: 20px;"></ion-icon>
-            </ion-col>
-          </ion-row> 
-        </ion-grid>
-      </ion-item>
-    </ion-list>
-    <ion-list *ngIf="dropdownState" class="dropdown-list">
-        <ion-item *ngFor="let item of itemsDropdowns[i]">
-          <ion-grid>
-            <ion-row>
-              <ion-col size="7">{{10 + i}}/9</ion-col>
-              <ion-col size="1"></ion-col>
-              <ion-col size="4" *ngIf="item == 'Presente', else Ausente " >
-                <p style="color: green;">{{ item }}</p>
-              </ion-col>
-              <ng-template #Ausente>
-                <p style="color: red;">{{ item }}</p>
-              </ng-template>
-            </ion-row>
-          </ion-grid>
+
+
+<ion-content>
+  <ion-grid>
+
+    <!-- CICLO DE ASIGNATURAS -->
+    <ion-row *ngFor="let curso of TodaAsignatura">
+      <h2>{{ curso.id }}</h2>
+
+      <!-- CICLO DE LAS SECCIONES POR ASIGNATURA -->
+      <ion-item *ngFor="let seccion of SeccionesPorAsignatura[curso.id]">
+        <h3>{{ seccion.id }}</h3> 
+        <h3>{{ seccion.Profesor }}</h3> 
+
+        <!-- CICLO DE ALUMNOS POR SECCION -->
+        <ion-item *ngFor="let alumno of AlumnosPorSeccion[curso.id][seccion.id]">
+          <h3>{{ alumno.id }}</h3> 
+
         </ion-item>
-    </ion-list>
-  </div>
+      </ion-item>
+
+    </ion-row>
+
+
+
+  </ion-grid>
 </ion-content>
+
+
+
 
 
 
