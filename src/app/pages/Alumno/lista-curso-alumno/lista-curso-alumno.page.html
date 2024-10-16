@@ -22,22 +22,34 @@
     <ion-row *ngFor="let curso of TodaAsignatura">
       <h2>{{ curso.id }}</h2>
 
+
       <!-- CICLO DE LAS SECCIONES POR ASIGNATURA -->
       <ion-item *ngFor="let seccion of SeccionesPorAsignatura[curso.id]">
         <h3>{{ seccion.id }}</h3> 
-        <h3>{{ seccion.Profesor }}</h3> 
+
 
         <!-- CICLO DE ALUMNOS POR SECCION -->
         <ion-item *ngFor="let alumno of AlumnosPorSeccion[curso.id][seccion.id]">
           <h3>{{ alumno.id }}</h3> 
 
+              <!-- CICLO DE asistencia POR SECCION -->
+
+
+              <ion-item *ngFor="let estado of AsistenciaAlumno[curso.id][seccion.id][alumno.id]">
+                <h3>{{ estado.Fecha.toDate().toLocaleDateString() }}</h3>
+                <h3>{{ estado.Estado }}</h3> 
+
+
+
+
+
+              </ion-item>
+
+
+
         </ion-item>
       </ion-item>
-
     </ion-row>
-
-
-
   </ion-grid>
 </ion-content>
 

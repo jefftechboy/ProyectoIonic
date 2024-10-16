@@ -41,6 +41,8 @@ export class ListaCursoAlumnoPage implements OnInit {
   SeccionesPorAsignatura: { [key: string]: any[] } = {};
   // Objeto que almacenará los alumnos por sección, usando el ID de la asignatura y el código de la sección
   AlumnosPorSeccion: { [key: string]: { [key: string]: any[] } } = {};
+  // Objeto que almacenará asistencia de los alumnos por sección, usando el ID de la asignatura y el código de la sección
+  AsistenciaAlumno: { [key: string]: { [key: string]: { [key: string]: any[] } } } = {};
 
   
   // Método para obtener todas las asignaturas
@@ -62,6 +64,16 @@ export class ListaCursoAlumnoPage implements OnInit {
                 this.AlumnosPorSeccion[curso.id] = {};
               }
               this.AlumnosPorSeccion[curso.id][seccion.id] = alumnos;
+
+              //Asistencia
+              alumnos.forEach( alumno => {
+                this.aa.EstadoAsistenciaAlumno(curso.id,seccion.id,alumno.id).subscribe(asistencia =>{
+                  this.AsistenciaAlumno[curso.id][seccion.id][alumno.id] = asistencia;
+                });
+              })                
+
+
+
             });
           });
 
