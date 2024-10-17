@@ -1,27 +1,24 @@
-.botonListadoCursoAlumno{
-    height: 50px;
-    width: 94%;
-    margin: 0 auto;
-    margin-top: 10px;
-    border-bottom: 1px solid black;
-    font-weight: bold;
-}
-
-.botonSeccionListadoCursoAlumno {
-    margin-top: 8px;    
-}
-
-.dropdown-list {
+.asignatura-container {
+    margin-bottom: 20px;
+  }
+  
+  .asignatura-card {
+    --background: #FFB800; 
+    padding: 10px;
+  }
+  
+  ion-button {
+    margin-top: 5px;
+  }
+  
+  ion-accordion-group {
+    margin-bottom: 10px;
+    --background: #FFB800;
+  }
+  .seccionSeleccionCaja{
     width: 90%;
     margin: 0 auto;
-    max-height: 220px; /* Ajusta la altura máxima según sea necesario */
-    overflow-y: auto; /* Habilita el scrollbar vertical si es necesario */
-}
-
-.dropdown-list::-webkit-scrollbar {
-    width: 0; /* Oculta el scrollbar en Webkit */
-    background: transparent; /* Opcional, para ocultar el fondo del scrollbar */
-  }  
-  #CabezaHeader{
-    background-color: #1A1A1A;
+  }
+  .tituloSeccion{
+    text-align: center;
   }

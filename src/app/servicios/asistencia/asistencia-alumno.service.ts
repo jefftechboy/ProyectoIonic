@@ -78,16 +78,7 @@ export class AsistenciaAlumnoService {
     .collection("Alumno")
     .doc(nomAlumno)
     .collection("Asistencia")
-    .snapshotChanges()  // Obtiene los metadatos y datos de la colección
-      .pipe(
-        map(actions => 
-          actions.map(a => {
-            const data = a.payload.doc.data() as any;  // Obtener los datos del documento
-            const id = a.payload.doc.id;  // Obtener el ID del documento
-            return { id, ...data };  // Retornar un objeto con los datos y el ID
-          })
-        )
-      );  
+    .valueChanges();
   }
   
   

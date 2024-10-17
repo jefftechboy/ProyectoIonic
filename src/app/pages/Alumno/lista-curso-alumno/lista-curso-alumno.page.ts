@@ -41,63 +41,68 @@ export class ListaCursoAlumnoPage implements OnInit {
   SeccionesPorAsignatura: { [key: string]: any[] } = {};
   // Objeto que almacenará los alumnos por sección, usando el ID de la asignatura y el código de la sección
   AlumnosPorSeccion: { [key: string]: { [key: string]: any[] } } = {};
-  // Objeto que almacenará asistencia de los alumnos por sección, usando el ID de la asignatura y el código de la sección
-  AsistenciaAlumno: { [key: string]: { [key: string]: { [key: string]: any[] } } } = {};
+  // Objeto que almacenará asistencia de los alumnos por sección, usando el ID de la asignatura, el código de la sección y el ID del alumno
+  AsistenciaPorAlumno: { [key: string]: { [key: string]: { [key: string]: any[] } } } = {};
 
   
-  // Método para obtener todas las asignaturas
-  AsignaturasGenerales(){
+  AsignaturasGenerales() {
     this.aa.TodasLasAsignaturas().subscribe(data => {
       this.TodaAsignatura = data;
-      
-      //Buscar secciones segun ID asignatura
+  
+      // Buscar secciones según ID de asignatura
       this.TodaAsignatura.forEach(curso => {
         this.aa.SeccionesPorAsignatura(curso.id).subscribe(secciones => {
-          // Almacenar las secciones en el objeto 'SeccionesPorAsignatura' usando el ID de la asignatura
           this.SeccionesPorAsignatura[curso.id] = secciones;
-
-
+  
           secciones.forEach(seccion => {
             this.aa.alumnoPorSeccion(curso.id, seccion.id).subscribe(alumnos => {
-              // Almacenar los alumnos en el objeto 'AlumnosPorSeccion' usando el ID de la asignatura y el ID de la sección
               if (!this.AlumnosPorSeccion[curso.id]) {
                 this.AlumnosPorSeccion[curso.id] = {};
               }
               this.AlumnosPorSeccion[curso.id][seccion.id] = alumnos;
-
-              //Asistencia
-              alumnos.forEach( alumno => {
-                this.aa.EstadoAsistenciaAlumno(curso.id,seccion.id,alumno.id).subscribe(asistencia =>{
-                  this.AsistenciaAlumno[curso.id][seccion.id][alumno.id] = asistencia;
+  
+              // Crear una estructura para almacenar asistencia por alumno
+              if (!this.AsistenciaPorAlumno[curso.id]) {
+                this.AsistenciaPorAlumno[curso.id] = {};
+              }
+              if (!this.AsistenciaPorAlumno[curso.id][seccion.id]) {
+                this.AsistenciaPorAlumno[curso.id][seccion.id] = {};
+              }
+  
+              alumnos.forEach(alumno => {
+                this.aa.EstadoAsistenciaAlumno(curso.id, seccion.id, alumno.id).subscribe(asistencia => {
+                  // Almacenar asistencia por asignatura, sección y alumno
+                  this.AsistenciaPorAlumno[curso.id][seccion.id][alumno.id] = asistencia;
                 });
-              })                
-
-
-
+              });
             });
           });
-
-
-
-
-
         });
       });
-
-      
     });
   }
+  
 
 
+  // Variables para el modal y la asistencia seleccionada
+  isModalOpen = false;
+  selectedAlumno = '';
+  asistenciaDetalle: any[] = [];
 
+  openModal(cursoId: string, seccionId: string, alumnoId: string) {
+    this.selectedAlumno = alumnoId;
+    // Aquí se obtiene el detalle de la asistencia del alumno
+    this.asistenciaDetalle = this.AsistenciaPorAlumno[cursoId][seccionId][alumnoId];
+    this.isModalOpen = true;
+  }
+
+  closeModal() {
+    this.isModalOpen = false;
+  }
 
 
     
 
    
 
-
-
-
-  
 }
