@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MenuController } from '@ionic/angular';
 import { NavController } from '@ionic/angular';
+import { LoginService } from 'src/app/servicios/inicio/login.service';
+import { ClaseActualService } from 'src/app/servicios/clase/clase-actual.service';
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
@@ -32,16 +34,6 @@ export class HomePage implements OnInit {
 
 
 
-
-
-
-
-
-
-
-
-
-
   usuario: string = '';
   profileCode: string = '';
 
@@ -49,6 +41,8 @@ export class HomePage implements OnInit {
     private router: Router,
     private menuController: MenuController,
     private navController: NavController,
+    public aa:LoginService,
+    public hh:ClaseActualService
   ) {}
 
   navigateAndClose(path: string) {
@@ -66,4 +60,7 @@ export class HomePage implements OnInit {
     }
   }
   
+  
+
+
 }

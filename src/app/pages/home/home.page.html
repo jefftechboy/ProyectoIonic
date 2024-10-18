@@ -3,7 +3,7 @@
   <!-- Cabezera del menu -->
   <ion-header>
     <ion-toolbar id="cabezeraMenu" >
-      <ion-title class="NombreUsuario" >{{ usuario }}</ion-title>
+      <ion-title class="NombreUsuario" >{{ aa.tipoUsuario }}</ion-title>
     </ion-toolbar>
   </ion-header>
   <!-- Cuerpo del menu -->
@@ -64,47 +64,26 @@
 <ion-content [fullscreen]="true">
   <!-- HOLA + NOMBRE + FOTO -->
   <div style="padding-top: 100px;">
-    <ng-container *ngIf="profileCode === 'profe'">
-      <h1 style="text-align: center;">BIENVENIDO DOCENTE</h1>
-    </ng-container>
-    <ng-container *ngIf="profileCode === 'alum'">
-      <h1 style="text-align: center;">BIENVENIDO ALUMNO</h1>
-    </ng-container>
-    <h5 style="text-align: center;">
-      {{ usuario }}
-    </h5>
-    <div class="fotoPerfil2">
-      <img src="https://w7.pngwing.com/pngs/312/283/png-transparent-man-s-face-avatar-computer-icons-user-profile-business-user-avatar-blue-face-heroes-thumbnail.png"
-      alt="Imagen"
-      class="fotoPerfil">
-    </div>
+      <h1 style="text-align: center;"> Hola {{aa.nombreAlumno}} </h1>
   </div>
-  <!-- DATOS DEL DIAS -->
-   <div style="margin-top: 30px;">
-    <ion-list>
-      <ion-item>
-        <ion-grid>
-          <ion-row style="text-align: center;">
-            <ion-col style="background-color: #FFB800; border-radius: 50px;" class="tituloClasesHome1" >Clases del dia</ion-col>
-            <ion-col style="text-align: center;" class="conteoClasesHome">7</ion-col>
-          </ion-row>
-        </ion-grid>
-      </ion-item>
-      <ion-item>
-        <ion-grid>
-          <ion-row style="text-align: center;">
-            <ion-col style="background-color: #43B02A; border-radius: 50px;" class="tituloClasesHome2">Clases asistidas</ion-col>
-            <ion-col class="conteoClasesHome">0</ion-col>
-          </ion-row>
-        </ion-grid>
-      </ion-item><ion-item>
-        <ion-grid>
-          <ion-row style="text-align: center;">
-            <ion-col style="background-color: #D50032; border-radius: 50px;" class="tituloClasesHome3">Clase en proceso</ion-col>
-            <ion-col class="conteoClasesHome">Aplicaciones Moviles</ion-col>
-          </ion-row>
-        </ion-grid>
-      </ion-item>
-    </ion-list>
-   </div>
+  <ion-card style="background-color: black;width: 85%; margin:0 auto" >
+    <ion-card-header>
+      <ion-card-title class="ion-text-center" style="color: #ffffff;">
+        <h1>
+          Asignatura en Proceso
+        </h1>
+      </ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      <h1 style="text-align: center;color:white " >
+        Aplicaciones Moviles
+      </h1>
+      <ion-button expand="full" class="botonHorarioClase">
+        <h2>
+          Lunes: 08:30 - 09:50
+        </h2>
+      </ion-button>
+    </ion-card-content>
+  </ion-card>
 </ion-content>

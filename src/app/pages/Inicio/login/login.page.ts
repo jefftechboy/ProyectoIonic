@@ -17,14 +17,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { LoginPageRoutingModule } from './login-routing.module';
-
-
-
-
-
-
-
-
+import { AsistenciaAlumnoService } from 'src/app/servicios/asistencia/asistencia-alumno.service';
+import { LoginService } from 'src/app/servicios/inicio/login.service';
 
 
 
@@ -53,75 +47,56 @@ export class AppModule {}
 export class LoginPage implements OnInit {
 
   constructor(private alertController: AlertController,
-    private navCtrl: NavController
+    private navCtrl: NavController, public aa:LoginService
   ) { }
   
   hide = true; // Esta es una propiedad
 
-  clickEvent(event: MouseEvent) {
-    this.hide = !this.hide;
-    event.stopPropagation();
-  }
+  
+
+  cuentas: any[] = [];
+
+  usuario:String= ''
+  contrasena:String= ''
 
 
-
-  nombre:string=''
-  password:string=''
 
   ngOnInit() {
-    let users: User[] = [
-      {
-        idUser:1,
-        username: 'freddy',
-        password: 'admin',
-        profile: {
-          id:1,
-          code: 'profe',
-          name: 'profesor'
-        }
-      },
-      {
-        idUser:2,
-        username: 'robertito',
-        password: '1234',
-        profile: {
-          id:2,
-          code: 'alum',
-          name: 'alumno'
-        }
-      }
-  ];
-
-    localStorage.setItem("users",JSON.stringify(users));
   }
 
-  handleKeyDown(event: KeyboardEvent) {
-    if (event.key === 'Enter') {
-      this.validar();
-    }
-  }
+
+
+
 
   validar() {
+    this.aa.login(this.usuario, this.contrasena).subscribe(data => {
+      this.cuentas = data;
   
-    let listLogin: User[] = JSON.parse(localStorage.getItem('users') || '[]');
-    let userLogin = listLogin.find(usr => usr.username === this.nombre && usr.password === this.password);
-
-    if (userLogin) {
-        console.log("Bienvenido");
-        localStorage.setItem("usuario", this.nombre);
-        localStorage.setItem("userLogin",JSON.stringify(userLogin));
-        this.navCtrl.navigateForward(['/home']);
-    } else {
-        console.log("Usuario/Password Incorrecto");
+      // Mueve la lógica que depende de cuentas aquí
+      console.log(this.cuentas.length);
+      if (this.cuentas.length > 0) {
+        if (this.usuario === this.cuentas[0].Usuario && this.contrasena === this.cuentas[0].Contrasena) {
+          console.log("Campos correctos de inicio de sesión");
+          this.aa.nombreAlumno = this.cuentas[0].Nombre;
+          this.aa.tipoUsuario = this.cuentas[0].Tipo;
+          this.navCtrl.navigateForward("/home");
+        } else {
+          this.presentAlert();
+        }
+      } else {
         this.presentAlert();
-    }
+      }
+    }, error => {
+      this.presentAlert();
+    });
   }
+  
 
 
   async presentAlert() {
     const alert = await this.alertController.create({
       header: 'Inicio sesión',
-      message: 'Usuario o contraseña incorrecto',
+      message: 'Usuario o Contraseña Incorrecta',
       buttons: ['Aceptar'],
     });
 

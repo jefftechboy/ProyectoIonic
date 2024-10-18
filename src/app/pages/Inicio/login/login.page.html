@@ -14,7 +14,7 @@
             <!-- texto previsual -->
             <mat-label>Ingresa tu usuario</mat-label>
             <!-- input -->
-            <input matInput placeholder="ejemplo@duocuc.cl"  [(ngModel)]="nombre" (keydown)="handleKeyDown($event)" >
+            <input matInput placeholder="ejemplo@duocuc.cl"  [(ngModel)]="usuario">
             <!-- icono de email -->
             <mat-icon matSuffix>email</mat-icon>
           </mat-form-field>
@@ -25,14 +25,12 @@
           <!-- texto previsual -->
           <mat-label>Ingresa tu contraseña</mat-label>
           <!-- input -->
-          <input  matInput [type]="hide ? 'password' : 'text'" [(ngModel)]="password" (keydown)="handleKeyDown($event)" />
+          <input  matInput [type]="hide ? 'password' : 'text'" [(ngModel)]="contrasena"/>
           <!-- Boton de revelar contraseña -->
           <button
             mat-icon-button
             matSuffix
-            (click)="clickEvent($event)"
-            [attr.aria-label]="'Hide password'"
-            [attr.aria-pressed]="hide">
+            (click)="validar()">
             <!-- icono de ojo -->
             <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
           </button>
@@ -44,4 +42,12 @@
     <ion-button class="login"  expand="block" (click)="validar()">Iniciar sesión</ion-button>
     <!-- Boton recuperar contraseña -->
     <ion-button  class="login" expand="block" routerLink="/RecuperarContraseña">Recuperar Contraseña</ion-button>
+
+
+    
+
+
+
+
+
 </ion-content>
