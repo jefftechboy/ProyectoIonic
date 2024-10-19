@@ -46,7 +46,8 @@ export class HomePage implements OnInit {
     private navController: NavController,
     public aa:LoginService,
     public hh:ClaseActualService,
-    private asignaturaService: AsistenciaAlumnoService
+    private asignaturaService: AsistenciaAlumnoService,
+    private afs:AngularFirestore
   ) {}
 
   navigateAndClose(path: string) {
@@ -54,10 +55,13 @@ export class HomePage implements OnInit {
       this.menuController.close('end'); // 'end' es el ID del menú, ajusta si es necesario
     });
   }
-
+  nombrealumno:String= this.aa.nombreAlumno;
   ngOnInit() {
     this.iterarAsignatura();
   }
+
+  
+
 
   asignaturas: Observable<any[]>; // Cambia a un observable
   secciones: Observable<any[]>; // Cambia a un observable
@@ -97,15 +101,15 @@ export class HomePage implements OnInit {
               // Aquí empieza la iteración sobre los valores
               for (const nombre of nombreAlumno) {
                 // Asegúrate de que asignatura.id existe
-                if (nombre.id === "Roberto Huaitro") {
+                if (nombre.id === this.nombrealumno) {
                   this.horario = this.hh.horarioAsignatura(asignatura.id, seccion.id);
                   this.horario.subscribe(horario => {
                     // Aquí empieza la iteración sobre los valores
                     for (const hora of horario) {
                       this.vecesCombinadas.push({
                         alumnoId: nombre.id,
-                        asignaturaId: seccion.id,
-                        seccionId: asignatura.id,
+                        asignaturaId: asignatura.id,
+                        seccionId: seccion.id,
                         dia: hora.id,
                         horaInicio: hora["Hora Inicio"],
                         horaFin: hora["Hora Fin"]
@@ -133,11 +137,6 @@ export class HomePage implements OnInit {
           this.claseEnProceso.push(item);
         }
     }
-    /*
-    for (const a of this.claseEnProceso){
-      console.log(a.seccionId)
-    }
-    */
   }
   
   

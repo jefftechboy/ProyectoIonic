@@ -18,43 +18,35 @@
 <ion-content>
   <!-- CICLO DE ASIGNATURAS -->
   <div *ngFor="let curso of TodaAsignatura" class="asignatura-container">
-    <!-- Título de la Asignatura -->
-    <ion-card class="asignatura-card">
-      <ion-card-header>
-        <ion-card-title style="text-align: center;">{{ curso.id }}</ion-card-title>
-      </ion-card-header>
-    </ion-card>
-
-    <!-- Acordeón para las secciones -->
-    <ion-accordion-group class="seccionSeleccionCaja" >
-      <ion-accordion *ngFor="let seccion of SeccionesPorAsignatura[curso.id]"  >
-        <ion-item slot="header" color="light" >
-          <ion-label class="tituloSeccion">{{ seccion.id }}</ion-label>
-          <ion-label class="tituloSeccion">67%</ion-label>
-        </ion-item>
-
-        <!-- Contenido desplegable (alumnos) -->
-        <div slot="content" *ngFor="let alumno of AlumnosPorSeccion[curso.id][seccion.id]">
-          <ion-button expand="full" color="primary" (click)="openModal(curso.id, seccion.id, alumno.id)">
-            {{ alumno.id }}
-          </ion-button>
-        </div>
-      </ion-accordion>
-    </ion-accordion-group>
+      <div *ngFor="let seccion of SeccionesPorAsignatura[curso.id]"  >
+          <div *ngIf="AlumnosPorSeccion[curso.id] && 
+                      AlumnosPorSeccion[curso.id][seccion.id] && 
+                      AlumnosPorSeccion[curso.id][seccion.id].length > 0">
+            <div *ngFor="let alumno of AlumnosPorSeccion[curso.id][seccion.id]">
+            <ion-card class="asignatura-card" (click)="openModal(curso.id, seccion.id, alumno.id)">
+              <ion-card-header>
+                <ion-card-title style="text-align: center;">{{ curso.id }} {{ seccion.id }} </ion-card-title>
+              </ion-card-header>
+            </ion-card>
+            </div>
+          </div>
+      </div>
   </div>
+
+
+
 
   <!-- Modal de detalles de asistencia -->
   <ion-modal [isOpen]="isModalOpen" (didDismiss)="closeModal()">
     <ng-template>
       <ion-header>
         <ion-toolbar>
-          <ion-title>Detalle Asistencia</ion-title>
+          <ion-title>Asistencia {{ getAsistenciaPorcentaje() | number: '1.0-2' }}%</ion-title>
           <ion-buttons slot="end">
             <ion-button (click)="closeModal()">Cerrar</ion-button>
           </ion-buttons>
         </ion-toolbar>
       </ion-header>
-
       <ion-content>
           <ion-grid *ngFor="let estado of asistenciaDetalle">
               <ion-row>
@@ -72,6 +64,20 @@
       </ion-content>
     </ng-template>
   </ion-modal>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
 </ion-content>
 
 

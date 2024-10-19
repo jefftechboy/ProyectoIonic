@@ -67,7 +67,6 @@ export class LoginPage implements OnInit {
 
 
 
-
   validar() {
     this.aa.login(this.usuario, this.contrasena).subscribe(data => {
       this.cuentas = data;
@@ -81,7 +80,6 @@ export class LoginPage implements OnInit {
           this.aa.tipoUsuario = this.cuentas[0].Tipo;
           this.navCtrl.navigateForward("/home");
         } else {
-          this.presentAlert();
         }
       } else {
         this.presentAlert();

@@ -84,15 +84,78 @@ export class AsistenciaAlumnoService {
   
   
   
+
+
+
+
+
+
+
+
+
+  // LISTA DE TODAS LAS ASIGNATURAS  (DEVUELVE EL ID Y SUS ATRIBUTOS)
+  TodasLasAsignaturasDocente(){
+    return this.afs.collection('Asignatura')
+      .snapshotChanges()  // Obtiene los metadatos y datos de la colección
+      .pipe(
+        map(actions => 
+          actions.map(a => {
+            const data = a.payload.doc.data() as any;  // Obtener los datos del documento
+            const id = a.payload.doc.id;  // Obtener el ID del documento
+            return { id, ...data };  // Retornar un objeto con los datos y el ID
+          })
+        )
+      );
+  }
+  // SECCIONES POR CADA ASIGNATURA (DEVUELVE EL ID Y SUS ATRIBUTOS)
+  SeccionesPorAsignaturaDocente(nomAsignatura:string){
+    return this.afs.collection('Asignatura') // Selecciona todas las asignaturas
+    .doc(nomAsignatura)
+    .collection("Seccion")
+    .snapshotChanges()  // Obtiene los metadatos y datos de la colección
+      .pipe(
+        map(actions => 
+          actions.map(a => {
+            const data = a.payload.doc.data() as any;  // Obtener los datos del documento
+            const id = a.payload.doc.id;  // Obtener el ID del documento
+            return { id, ...data };  // Retornar un objeto con los datos y el ID
+          })
+        )
+      );  
+  }
+  // ALUMNOS FILTRADOS POR SECCION
+  alumnoPorSeccionDocente(nomAsignatura:string,codSeccion:string){
+    return this.afs.collection('Asignatura') // Selecciona todas las asignaturas
+    .doc(nomAsignatura)
+    .collection("Seccion")
+    .doc(codSeccion)
+    .collection("Alumno")
+    .snapshotChanges()  // Obtiene los metadatos y datos de la colección
+      .pipe(
+        map(actions => 
+          actions.map(a => {
+            const data = a.payload.doc.data() as any;  // Obtener los datos del documento
+            const id = a.payload.doc.id;  // Obtener el ID del documento
+            return { id, ...data };  // Retornar un objeto con los datos y el ID
+          })
+        )
+      );  
+  }
+
+  // Detalle Asistencia
+  EstadoAsistenciaAlumnoDocente(nomAsignatura:string,codSeccion:string,nomAlumno:string){
+    return this.afs.collection('Asignatura') // Selecciona todas las asignaturas
+    .doc(nomAsignatura)
+    .collection("Seccion")
+    .doc(codSeccion)
+    .collection("Alumno")
+    .doc(nomAlumno)
+    .collection("Asistencia")
+    .valueChanges();
+  }
   
-
-
-
-
-
-
-
-
+  
+  
 
 
 

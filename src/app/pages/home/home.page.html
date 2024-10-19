@@ -9,13 +9,13 @@
   <!-- Cuerpo del menu -->
   <ion-content id="CuerpoMenu">
     <ion-list>
-      <div *ngIf="profileCode === 'profe'" class="container-fluid">
+      <div *ngIf="aa.tipoUsuario === 'Docente'" class="container-fluid">
         <ion-item id="BotonHome" expand="block" (click)="navigateAndClose('/listadoCursoDocente')">Lista Curso Docente</ion-item>
         <ion-item id="BotonHome" expand="block" (click)="navigateAndClose('/InformesCursoDocente')">Informes Docente</ion-item>
         <ion-item id="BotonHome" expand="block" (click)="navigateAndClose('/GenerarQrDocente')">Toma de Asistencia</ion-item>          
       </div>
         <!-- Mostrar botones para alumnos -->
-        <div *ngIf="profileCode === 'alum'">
+        <div *ngIf="aa.tipoUsuario === 'Alumno'">
           <ion-item id="BotonHome" expand="block" (click)="navigateAndClose('/listadoCursoAlumno')">Lista Cursos Alumnos</ion-item>
           <ion-item id="BotonHome" expand="block" (click)="navigateAndClose('/QrAlumno')">Lectura QR Alumnos</ion-item>
         </div>
@@ -64,61 +64,34 @@
 <ion-content [fullscreen]="true">
   <!-- HOLA + NOMBRE + FOTO -->
   <div style="padding-top: 100px;">
-      <h1 style="text-align: center;"> Hola {{aa.nombreAlumno}} </h1>
+      <h1 style="text-align: center;">Hola {{aa.nombreAlumno}} </h1>
   </div>
-  <ion-card style="background-color: black;width: 85%; margin:0 auto" >
-    <ion-card-header>
-      <ion-card-title class="ion-text-center" style="color: #ffffff;">
-        <h1>
-          Asignatura en Proceso
-        </h1>
-      </ion-card-title>
-    </ion-card-header>
-
-    <ion-card-content>
-      <h1 style="text-align: center;color:white " >
-        Aplicaciones Moviles
-      </h1>
-      <ion-button expand="full" class="botonHorarioClase">
-        <h2>
-          Lunes: 08:30 - 09:50
-        </h2>
-      </ion-button>
-    </ion-card-content>
-  </ion-card>
-
-
-
-
-  <div *ngFor="let a of vecesCombinadas">
-    <ion-item>
-      {{ a.seccionId }}
-      {{ a.asignaturaId }}
-      {{ a.alumnoId }}
-      {{ a.dia }}
-      {{ a.horaInicio }}
-      {{ a.horaFin }}
-    </ion-item>
+  <!-- Clase en proceso -->
+<div *ngIf="claseEnProceso.length > 0; else noData" class="clase-container">
+  <div *ngFor="let a of claseEnProceso" class="clase-card">
+    <h1 class="titulo-card">Clase en Progreso</h1>
+    <div class="clase-header">
+      <h2>{{ a.asignaturaId }}</h2>
+      <span class="asignatura">{{ a.seccionId }}</span>
+    </div>
+    <div class="clase-body">
+      <p><strong>Día:</strong> {{ a.dia }}</p>
+      <div class="horario">
+        <p><strong>Inicio:</strong> {{ a.horaInicio }}</p>
+        <p><strong>Fin:</strong> {{ a.horaFin }}</p>
+      </div>
+    </div>
   </div>
-  <div *ngFor="let a of claseEnProceso">
-    <h1>CLASE EN PROGRESO</h1>
-    <ion-item>
-      {{ a.seccionId }}
-      {{ a.asignaturaId }}
-      {{ a.alumnoId }}
-      {{ a.dia }}
-      {{ a.horaInicio }}
-      {{ a.horaFin }}
-    </ion-item>
+</div>
+
+<!-- Card para cuando no hay clases -->
+<ng-template #noData>
+  <div class="no-clase-card">
+    <h1 class="titulo-card">Clase en Progreso</h1>
+    <div class="no-clase-content">
+      <h2>No hay clases en progreso</h2>
+      <p>Por favor, vuelve más tarde para ver las próximas clases.</p>
+    </div>
   </div>
-
-
-  
-
-
-
-
-
-
-
+</ng-template>
 </ion-content>
