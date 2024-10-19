@@ -86,4 +86,39 @@
       </ion-button>
     </ion-card-content>
   </ion-card>
+
+
+
+
+  <div *ngFor="let a of vecesCombinadas">
+    <ion-item>
+      {{ a.seccionId }}
+      {{ a.asignaturaId }}
+      {{ a.alumnoId }}
+      {{ a.dia }}
+      {{ a.horaInicio }}
+      {{ a.horaFin }}
+    </ion-item>
+  </div>
+  <div *ngFor="let a of claseEnProceso">
+    <h1>CLASE EN PROGRESO</h1>
+    <ion-item>
+      {{ a.seccionId }}
+      {{ a.asignaturaId }}
+      {{ a.alumnoId }}
+      {{ a.dia }}
+      {{ a.horaInicio }}
+      {{ a.horaFin }}
+    </ion-item>
+  </div>
+
+
+  
+
+
+
+
+
+
+
 </ion-content>
