@@ -66,8 +66,8 @@
   <div style="padding-top: 100px;">
       <h1 style="text-align: center;">Hola {{aa.nombreAlumno}} </h1>
   </div>
-  <!-- Clase en proceso -->
-<div *ngIf="claseEnProceso.length > 0; else noData" class="clase-container">
+<!-- Clase en proceso -->
+<div *ngIf="claseEnProceso.length > 0; else noAlumno" class="clase-container">
   <div *ngFor="let a of claseEnProceso" class="clase-card">
     <h1 class="titulo-card">Clase en Progreso</h1>
     <div class="clase-header">
@@ -84,6 +84,30 @@
   </div>
 </div>
 
+<!-- CUANDO NO ES ALUMNO -->
+<ng-template #noAlumno>
+  <!-- Clase actual docente -->
+  <div *ngIf="claseActualDocente.length > 0; else noData" class="clase-container">
+    <div *ngFor="let j of claseActualDocente" class="clase-card">
+      <h1 class="titulo-card">Clase en Progreso</h1>
+      <div class="clase-header">
+        <h2>{{ j.asignaturaId }}</h2>
+        <span class="asignatura">{{ j.seccionId }}</span>
+      </div>
+      <div class="clase-body">
+        <p><strong>Día:</strong> {{ j.dia }}</p>
+        <div class="horario">
+          <p><strong>Inicio:</strong> {{ j.horaInicio }}</p>
+          <p><strong>Fin:</strong> {{ j.horaFin }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+
+
+
 <!-- Card para cuando no hay clases -->
 <ng-template #noData>
   <div class="no-clase-card">
@@ -94,4 +118,6 @@
     </div>
   </div>
 </ng-template>
+
+
 </ion-content>

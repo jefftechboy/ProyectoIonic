@@ -55,9 +55,10 @@ export class HomePage implements OnInit {
       this.menuController.close('end'); // 'end' es el ID del menú, ajusta si es necesario
     });
   }
-  nombrealumno:String= this.aa.nombreAlumno;
+  nombreUsuario:String= this.aa.nombreAlumno;
   ngOnInit() {
-    this.iterarAsignatura();
+    this.claseEnProcesoAlumno();
+    this.claseEnProcesoDocente();
   }
 
   
@@ -84,8 +85,22 @@ export class HomePage implements OnInit {
     horaInicio: string,
     horaFin: string }[] = [];
 
+  claseActualDocente: { 
+    asignaturaId: string, 
+    seccionId: string,
+    dia: string,
+    horaInicio: string,
+    horaFin: string }[] = [];
+
+  claseProcesoDocente: { 
+    asignaturaId: string, 
+    seccionId: string,
+    dia: string,
+    horaInicio: string,
+    horaFin: string }[] = [];
+
    //Coleccion segun alumno
-   iterarAsignatura() {
+   claseEnProcesoAlumno() {
     this.asignaturas = this.hh.TodasLasAsignaturas();
     this.asignaturas.subscribe(asignaturas => {
       // Aquí empieza la iteración sobre los valores
@@ -101,7 +116,7 @@ export class HomePage implements OnInit {
               // Aquí empieza la iteración sobre los valores
               for (const nombre of nombreAlumno) {
                 // Asegúrate de que asignatura.id existe
-                if (nombre.id === this.nombrealumno) {
+                if (nombre.id === this.nombreUsuario) {
                   this.horario = this.hh.horarioAsignatura(asignatura.id, seccion.id);
                   this.horario.subscribe(horario => {
                     // Aquí empieza la iteración sobre los valores
@@ -127,7 +142,40 @@ export class HomePage implements OnInit {
     });
   }
   
-  
+  //Coleccion segun alumno
+  claseEnProcesoDocente() {
+    this.asignaturas = this.hh.TodasLasAsignaturas();
+    this.asignaturas.subscribe(asignaturas => {
+      // Aquí empieza la iteración sobre los valores
+      for (const asignatura of asignaturas) {
+        // Asegúrate de que asignatura.id existe
+        this.secciones = this.hh.SeccionesPorAsignatura(asignatura.id);
+        this.secciones.subscribe(secciones => {
+          // Aquí empieza la iteración sobre los valores
+          for (const seccion of secciones) {
+            if (seccion.Profesor === this.nombreUsuario) {
+              this.horario = this.hh.horarioAsignatura(asignatura.id, seccion.id);
+              this.horario.subscribe(horario => {
+                // Aquí empieza la iteración sobre los valores
+                for (const hora of horario) {
+                  this.claseProcesoDocente.push({
+                    asignaturaId: asignatura.id,
+                    seccionId: seccion.id,
+                    dia: hora.id,
+                    horaInicio: hora["Hora Inicio"],
+                    horaFin: hora["Hora Fin"]
+                  });
+                }
+                // Llama a claseEnProcesoMetodo aquí, después de llenar vecesCombinadas
+                this.claseEnProcesoMetodoDocente();
+              });
+            }
+          }
+        });
+      }
+    });
+  }
+
   claseEnProcesoMetodo() {
     this.claseEnProceso = []; // Limpiar el array al inicio
     for (const item of this.vecesCombinadas) {  
@@ -135,6 +183,16 @@ export class HomePage implements OnInit {
         console.log(this.hh.verificarHorario(item.dia,item.horaInicio,item.horaFin))
         if (this.hh.verificarHorario(item.dia,item.horaInicio,item.horaFin)) {
           this.claseEnProceso.push(item);
+        }
+    }
+  }
+  claseEnProcesoMetodoDocente() {
+    this.claseActualDocente = []; // Limpiar el array al inicio
+    for (const item of this.claseProcesoDocente) {  
+        console.log((item.dia+item.horaInicio+item.horaFin))
+        console.log(this.hh.verificarHorario(item.dia,item.horaInicio,item.horaFin))
+        if (this.hh.verificarHorario(item.dia,item.horaInicio,item.horaFin)) {
+          this.claseActualDocente.push(item);
         }
     }
   }
