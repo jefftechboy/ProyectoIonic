@@ -18,12 +18,12 @@
     <ion-item *ngFor="let secc of SeccionesPorAsignatura[(curso.id)]" class="asistenciaAsignaturasItems"
     size="large" 
     expand="full" 
-    style="border-bottom: 1px solid black; --color: #1A1A1A;" 
-    routerLink="/listCurDocDetalle">
+    style="border-bottom: 1px solid black; --color: #1A1A1A;"
+    (click)="guardarDatosAsignatura(curso.id, secc.id, secc.Profesor)" >
       {{ this.lg.nombreAlumno }}
       {{ curso.id }}
       {{ secc.id }}
       {{ secc.Profesor }}
-    </ion-item>
+    </ion-item> 
   </ion-list>
 </ion-content>

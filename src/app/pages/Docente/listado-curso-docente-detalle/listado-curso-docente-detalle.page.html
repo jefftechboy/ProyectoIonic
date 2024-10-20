@@ -15,92 +15,18 @@
 </ion-header>
 
 <ion-content [fullscreen]="true" >
-  <ion-list style="margin-bottom: 20px;margin-top: 10px;">
-    <ion-item>
-      <ion-label>
-        <ion-grid  class="cardHeader">
-          <ion-row>
-            <ion-col size="12" style="text-align: center;">
-              <h1>Freddy Campos</h1>
-            </ion-col>
-          </ion-row>
-          <ion-row>
-            <ion-col size="6">
-              <p style="font-weight: bold;" >
-                Miercoles 8:30-09:50
-              </p>
-            </ion-col>
-            <ion-col size="6">
-              <p  style="font-weight: bold;">
-                Viernes 08:30-10:40
-              </p>
-            </ion-col>
-          </ion-row>
-          <ion-row>
-            <ion-col size="6">
-              <h5>
-                PA_ASY4131
-              </h5>
-            </ion-col>
-            <ion-col size="3">
-              <h5>
-                012D
-              </h5>
-            </ion-col>
-            <ion-col size="3">
-              <h5>
-                87%
-              </h5>
-            </ion-col>
-          </ion-row>
-        </ion-grid>
-      </ion-label>
-    </ion-item>
-  </ion-list>
   
-  <ion-list *ngFor="let dropdownState of dropdownStates; let i = index" 
-      style="margin-top: 0px;">
-      <ion-item (click)="toggleDropdown(i)" 
-        style="border-top: 1px solid black;">
-        <ion-label>
-          <ion-grid expand = "block">
-            <ion-row>
-              <ion-col size="8">
-                <h5>
-                  Alumno {{i + 1}}
-                </h5>
-              </ion-col>
-              <ion-col size="3" style="text-align: right;" >
-                <h5 style="text-align: center;">
-                  {{ i + 75 }}%
-                </h5>
-              </ion-col>
-              <ion-col size="1">
-                <ion-icon name="add-circle" style="font-size: 20px;"></ion-icon>
-              </ion-col>
-            </ion-row>
-          </ion-grid>
-        </ion-label>
-      </ion-item>
-
-      <ion-list *ngIf="dropdownState" expand = "block" class="dropdown-list" >
-          <ion-item *ngFor="let item of itemsDropdowns[i], let i = index">
-            <ion-grid>
-              <ion-row>
-                <ion-col size="7">{{10 + i}}/9</ion-col>
-                <ion-col size="1"></ion-col>
-                <ion-col size="4" *ngIf="item == 'Presente', else Ausente " >
-                  <p style="color: green;">{{ item }}</p>
-                </ion-col>
-                <ng-template #Ausente>
-                  <p style="color: red;">{{ item }}</p>
-                </ng-template>
-              </ion-row>
-            </ion-grid>
-          </ion-item>
-      </ion-list>
-  </ion-list>
-
+  {{ this.dc.asignaturaDocente }}
+  {{ this.dc.nombreDocente }}
+  {{ this.dc.seccionDocente }}
+  
+<div *ngFor = "let s of AlumnosPorSeccion">
+    {{ s.id }}
+    <div *ngFor = "let d of asistenciaDetalle[(s.id)]">
+        {{ d.Fecha.toDate().toLocaleDateString() }}
+        {{ d.Estado }}
+    </div>
+</div>
 
 </ion-content>
 

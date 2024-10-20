@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-
+import { Observable } from 'rxjs';
+import { CursoDocenteService } from 'src/app/servicios/detalle/curso-docente.service';
+import { DetalleAsistenciaService } from 'src/app/servicios/docente/detalle-asistencia.service';
 @Component({
   selector: 'app-listado-curso-docente-detalle',
   templateUrl: './listado-curso-docente-detalle.page.html',
@@ -7,32 +9,40 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ListadoCursoDocenteDetallePage implements OnInit {
 
-  constructor() { }
+  constructor(public dc:CursoDocenteService, public hh:DetalleAsistenciaService) { }
 
-  
-  // Estado de cada dropdown
-  dropdownStates = [false, false, false, false, false, false, false];
+  AlumnosPorSeccion: any[] = [];
+  // Objeto que almacenará asistencia de los alumnos por sección, usando el ID de la asignatura, el código de la sección y el ID del alumno
+  asistenciaDetalle: { [key: string]: any[] } = {};
 
-  // Define diferentes arrays para los ítems de cada dropdown
-  itemsDropdowns = [
-    ['Presente', 'Ausente', 'Presente', 'Presente', 'Ausente', 'Presente'],
-    ['Ausente', 'Presente', 'Ausente', 'Presente', 'Presente', 'Ausente'],
-    ['Presente', 'Presente', 'Ausente', 'Ausente', 'Presente', 'Presente'],
-    ['Ausente', 'Presente', 'Presente', 'Ausente', 'Presente', 'Presente'],
-    ['Presente', 'Ausente', 'Presente', 'Ausente', 'Presente', 'Ausente'],
-    ['Ausente', 'Presente', 'Presente', 'Ausente', 'Presente', 'Presente'],
-    ['Presente', 'Ausente', 'Presente', 'Ausente', 'Presente', 'Ausente']
-  ];
-
-  toggleDropdown(index: number) {
-    this.dropdownStates[index] = !this.dropdownStates[index];
-    for (let i = 0; i < this.dropdownStates.length; i++) {
-      if (i !== index) {
-        this.dropdownStates[i] = false;
-      }
-    }
-  }
   ngOnInit() {
+    console.log(this.dc.asignaturaDocente)
+    console.log(this.dc.nombreDocente)
+    console.log(this.dc.seccionDocente)
+    this.detalleCursoDocente();
   }
 
+  detalleCursoDocente() {
+    this.hh.alumnoPorSeccion(
+      this.dc.asignaturaDocente,
+      this.dc.seccionDocente).subscribe(data => {
+        this.AlumnosPorSeccion = data
+
+        data.forEach(alumno => {
+          this.hh.EstadoAsistenciaAlumno(
+            this.dc.asignaturaDocente,
+            this.dc.seccionDocente,
+            alumno.id
+          ).subscribe(data => {
+
+          for (const hora of data) {
+            this.hh.EstadoAsistenciaAlumno(this.dc.asignaturaDocente,this.dc.seccionDocente,alumno.id).subscribe(detalle =>{
+              this.asistenciaDetalle[alumno.id] = detalle;
+
+            });
+          }
+          });
+        });
+  });
+  }
 }
