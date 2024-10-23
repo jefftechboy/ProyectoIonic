@@ -61,7 +61,7 @@ export class ListadoCursoDocenteDetallePage implements OnInit {
       return '0%'; // No hay asistencia registrada
     }
 
-    const total = detalles.length;
+    const total = detalles.filter(d => d.Estado === 'Presente' ||  d.Estado === 'Ausente' ).length;
     const presentes = detalles.filter(d => d.Estado === 'Presente').length;
     const porcentaje = (presentes / total) * 100;
     return `${porcentaje.toFixed(2)}%`; // Retorna el porcentaje con 2 decimales

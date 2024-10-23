@@ -11,7 +11,8 @@ import { environment } from 'src/environments/environment.prod';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { AngularFireModule} from '@angular/fire/compat'
 import { HttpClientModule } from '@angular/common/http';
-
+import { QrCodeModule } from 'ng-qrcode'
+import { QrDocenteLecturaPage } from './pages/Docente/qr-docente-lectura/qr-docente-lectura.page';
 @NgModule({
   declarations: [AppComponent],  // Elimina la declaración de InformeModalComponent
   imports: [
@@ -19,6 +20,7 @@ import { HttpClientModule } from '@angular/common/http';
     IonicModule.forRoot(),
     AppRoutingModule,
     InformeModalModule,
+    QrCodeModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFirestoreModule,
     HttpClientModule,

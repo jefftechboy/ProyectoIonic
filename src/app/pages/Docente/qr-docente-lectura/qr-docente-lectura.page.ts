@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController } from '@ionic/angular';
+import { QrCodeModule } from 'ng-qrcode'
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-qr-docente-lectura',

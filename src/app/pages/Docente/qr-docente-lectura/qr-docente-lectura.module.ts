@@ -8,11 +8,14 @@ import { QrDocenteLecturaPageRoutingModule } from './qr-docente-lectura-routing.
 
 import { QrDocenteLecturaPage } from './qr-docente-lectura.page';
 
+import { QrCodeModule } from 'ng-qrcode'; // Asegúrate de importar esto
+
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
+    QrCodeModule,
     QrDocenteLecturaPageRoutingModule
   ],
   declarations: [QrDocenteLecturaPage]

@@ -35,7 +35,7 @@ export class ListaCursoAlumnoPage implements OnInit {
   
 // En tu componente .ts
 getAsistenciaPorcentaje() {
-  const total = this.asistenciaDetalle.length;
+  const total = this.asistenciaDetalle.filter(estado => estado.Estado === 'Presente' ||  estado.Estado === 'Ausente' ).length;
   const presentes = this.asistenciaDetalle.filter(estado => estado.Estado === 'Presente').length;
 
   return total > 0 ? (presentes / total) * 100 : 0; // Evitar división por cero
