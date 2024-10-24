@@ -8,34 +8,17 @@
   </ion-grid>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <div class="cuadroQr">
-    <img src="https://w7.pngwing.com/pngs/1006/79/png-transparent-qr-code-qr-code-qr-code-thumbnail.png" 
-    style="width: 280px;
-    height: 280px;">
-    <h2 style="text-align: center;">Escanea el Codigo QR</h2>
-  </div>
 
-
-  <ion-button id="present-alert1" class="botonAsistenciaGuardada" >Click Me</ion-button>
-  <ion-button id="present-alert2" class="botonAsistenciaGuardada2" >Click Me</ion-button>
-  <ion-button id="present-alert3" class="botonAsistenciaGuardada3" >Click Me</ion-button>
-  <ion-alert
-    trigger="present-alert1"
-    header="ERROR"
-    message="El dispositivo no se encuentra en el aula"
-    [buttons]="alertButtons"
-  ></ion-alert>
-  <ion-alert
-    trigger="present-alert2"
-    header="ERROR 404"
-    message="Ha habido error en la lectura intentalo de nuevo"
-    [buttons]="alertButtons"
-  ></ion-alert>
-  <ion-alert
-    trigger="present-alert3"
-    header=" EXITO "
-    message="La asistencia fue grabada"
-    [buttons]="alertButtons"
-  ></ion-alert>
+<ion-content>
+  <ion-list>
+    <ion-item *ngFor="let barcode of barcodes">
+      <ion-label position="stacked">{{ barcode.format }}</ion-label>
+      <ion-input type="text" [value]="barcode.rawValue"></ion-input>
+    </ion-item>
+  </ion-list>
+  <ion-fab slot="fixed" vertical="bottom" horizontal="end">
+    <ion-fab-button (click)="scan()" [disabled]="!isSupported">
+      <ion-icon name="scan"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 </ion-content>

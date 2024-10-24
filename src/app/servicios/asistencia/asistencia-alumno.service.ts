@@ -157,7 +157,11 @@ export class AsistenciaAlumnoService {
   
   
 
-
+  //informacion para toma de asistencia
+  public fecha: string = new Date().toLocaleDateString('es-ES', { day: '2-digit', month: '2-digit', year: 'numeric' }).replace(/\//g, '-');
+  public asignatura:string =''
+  public seccion:string =''
+  public alumno:string = '';
 
 
 

@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 import { NavController } from '@ionic/angular';
 import { QrCodeModule } from 'ng-qrcode'
-import { CommonModule } from '@angular/common';
-
+import {  OnInit } from '@angular/core';
+import { AsistenciaAlumnoService } from 'src/app/servicios/asistencia/asistencia-alumno.service';
+import { Observable } from 'rxjs';
 @Component({
   selector: 'app-qr-docente-lectura',
   templateUrl: './qr-docente-lectura.page.html',
@@ -13,8 +14,20 @@ export class QrDocenteLecturaPage {
   intervalo: any;
   temporizadorIniciado: boolean = false;
 
-  constructor(private navController: NavController) { }
+  constructor(
+    private navController: NavController,
+    public QRinfor:AsistenciaAlumnoService
+  ) { }
   
+  public datosAsignatura: string[] =  [
+    this.QRinfor.asignatura,
+    this.QRinfor.fecha,
+    this.QRinfor.seccion,
+  ];
+
+// Convertir a una cadena JSON
+public datosAsignaturaJSON: string = JSON.stringify(this.datosAsignatura);
+
   iniciarTemporizador() {
     this.tiempoRestante = 10; // 300 segundos (5 minutos)
     this.temporizadorIniciado = true;
@@ -39,5 +52,8 @@ export class QrDocenteLecturaPage {
   }
   ngOnInit() {
     this.iniciarTemporizador();
+
   }
+  
+
 }

@@ -49,15 +49,21 @@
       </ion-header>
       <ion-content>
           <ion-grid *ngFor="let estado of asistenciaDetalle">
-              <ion-row>
+
+              <ion-row *ngIf =" estado.Estado  == 'Presente'">
                 <ion-col>
                   <h3>{{ estado.Fecha.toDate().toLocaleDateString() }}</h3>
                 </ion-col>
-                <ion-col *ngIf =" estado.Estado  == 'Presente'">
+                <ion-col>
                     <h3 style="color: green;" >{{ estado.Estado }}</h3>
                 </ion-col>
-                <ion-col *ngIf =" estado.Estado  == 'Ausente'" >
-                    <h3 style="color: red;" >{{ estado.Estado }}</h3>
+              </ion-row>
+              <ion-row *ngIf =" estado.Estado  == 'Ausente'">
+                <ion-col>
+                  <h3>{{ estado.Fecha.toDate().toLocaleDateString() }}</h3>
+                </ion-col>
+                <ion-col>
+                    <h3 style="color: rgb(255, 0, 0);" >{{ estado.Estado }}</h3>
                 </ion-col>
               </ion-row>
           </ion-grid>

@@ -14,16 +14,7 @@
 </ion-header>
 
 <ion-content [fullscreen]="true" class="ion-padding" style="background-color: #FFFFFF;">
-  <ion-card class="ion-text-center">
-    <ion-card-header>
-      <ion-card-title style="color: #003366;">Código QR de Asistencia</ion-card-title>
-    </ion-card-header>
-    <ion-card-content>
-      <qr-code value="Hello world!" size="300" errorCorrectionLevel="M"></qr-code>
-
-    </ion-card-content>
-  </ion-card>
-
+  <qr-code [value]="datosAsignaturaJSON" size="300" errorCorrectionLevel="M"></qr-code>
   <ion-card class="ion-text-center">
     <ion-card-content>
       <!-- Cuadro del temporizador -->
