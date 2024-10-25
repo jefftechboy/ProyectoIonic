@@ -1,52 +1,27 @@
-import { Component, OnInit } from '@angular/core';
-
-
-import { Barcode, BarcodeScanner } from '@capacitor-mlkit/barcode-scanning';
-import { AlertController } from '@ionic/angular';
+import { Component, AfterViewInit } from '@angular/core';
+import { BrowserQRCodeReader } from '@zxing/browser';
 
 @Component({
   selector: 'app-qr-alumno-lectura',
   templateUrl: './qr-alumno-lectura.page.html',
   styleUrls: ['./qr-alumno-lectura.page.scss'],
 })
-export class QrAlumnoLecturaPage implements OnInit {
+export class QrAlumnoLecturaPage implements AfterViewInit {
+  private qrReader = new BrowserQRCodeReader();
+  infoRecibida: any = ''
+  constructor() {}
 
-
-  isSupported = false;
-  barcodes: Barcode[] = [];
-
-  constructor(private alertController: AlertController) {}
-
-  ngOnInit() {
-    BarcodeScanner.isSupported().then((result) => {
-      this.isSupported = result.supported;
-    });
+  ngAfterViewInit() {
+    this.startScan();
   }
 
-  async scan(): Promise<void> {
-    const granted = await this.requestPermissions();
-    if (!granted) {
-      this.presentAlert();
-      return;
-    }
-    const { barcodes } = await BarcodeScanner.scan();
-    this.barcodes.push(...barcodes);
+  startScan() {
+    this.qrReader.decodeOnceFromVideoDevice(undefined, 'QR')
+      .then(result => {
+        console.log('Código QR:', result.getText());
+        this.infoRecibida =  result;
+        // Aquí puedes procesar el resultado, por ejemplo, guardarlo o mostrarlo en la interfaz
+      })
+      .catch(err => console.error('Error en el escaneo:', err));
   }
-
-  async requestPermissions(): Promise<boolean> {
-    const { camera } = await BarcodeScanner.requestPermissions();
-    return camera === 'granted' || camera === 'limited';
-  }
-
-  async presentAlert(): Promise<void> {
-    const alert = await this.alertController.create({
-      header: 'Permission denied',
-      message: 'Please grant camera permission to use the barcode scanner.',
-      buttons: ['OK'],
-    });
-    await alert.present();
-  }
-
- 
-
 }
