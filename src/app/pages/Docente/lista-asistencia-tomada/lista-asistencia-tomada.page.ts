@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { MenuController } from '@ionic/angular';
 import { LoginService } from 'src/app/servicios/inicio/login.service';
 import { ClaseActualService } from 'src/app/servicios/clase/clase-actual.service';
+import { AsistenciaAlumnoService } from 'src/app/servicios/asistencia/asistencia-alumno.service';
 @Component({
   selector: 'app-lista-asistencia-tomada',
   templateUrl: './lista-asistencia-tomada.page.html',
@@ -21,6 +22,7 @@ export class ListaAsistenciaTomadaPage implements OnInit {
     private menuController: MenuController,
     public aa:LoginService,
     public hh:ClaseActualService,
+    public aas:AsistenciaAlumnoService
   ) {}
 
   navigateAndClose(path: string) {
@@ -32,7 +34,11 @@ export class ListaAsistenciaTomadaPage implements OnInit {
 
   ngOnInit() {
     this.claseEnProcesoDocente();
+    // Establece la fecha actual al inicio
+    this.hoy = new Date();
+    this.hoy.setHours(0, 0, 0, 0); // Asegura que la hora sea 00:00:00
   }
+  hoy: Date = new Date(); // Crea la fecha actual
 
   
 
@@ -85,18 +91,18 @@ export class ListaAsistenciaTomadaPage implements OnInit {
           }
         });
       }
+      
     });
   }
   claseEnProcesoMetodoDocente() {
     this.claseActualDocente = []; // Limpiar el array al inicio
     for (const item of this.claseProcesoDocente) {  
-        console.log((item.dia+item.horaInicio+item.horaFin))
-        console.log(this.hh.verificarHorario(item.dia,item.horaInicio,item.horaFin))
         if (this.hh.verificarHorario(item.dia,item.horaInicio,item.horaFin)) {
           this.claseActualDocente.push(item);
           this.alumno = this.hh.alumnoPorSeccion(item.asignaturaId,item.seccionId);
         }
     }
+    this.obtencionDatosClases();
   }
 /* ----------------------ALERTAS DE CONFIRMACION----------------------------------------------------------------- */
   // Método para mostrar el primer alert
@@ -138,20 +144,52 @@ export class ListaAsistenciaTomadaPage implements OnInit {
   async showAlerts() {
     await this.presentSecondAlert(); // Start with the second alert
   }
-/* --------------LISTADOS DE ALUMNOS DE LA ASIGNATURA Y SECCION-------------- */
+/* -------------- LISTADOS DE ALUMNOS DE LA ASIGNATURA Y SECCION -------------- */
+nombreAsignatura: string = '';
+nombreSeccion: string = '';
+AlumnosPorSeccion: Observable<any[]>;
+AsistenciaPorAlumno: { [id: string]: any[] } = {}; // Almacena las asistencias filtradas
 
-
-
-
-/* -------------------------------------------------------------------------- */ 
-  //Ciclo ejemplo
-  i: number = 1;
-  maxNumber: number = 10;
-  getNumbers(): number[] {
-    const numbers = [];
-    for (let num = this.i; num <= this.maxNumber; num++) {
-      numbers.push(num);
+ obtencionDatosClases() {
+    for (let clase of this.claseActualDocente) {
+      this.nombreAsignatura = clase.asignaturaId;
+      this.nombreSeccion = clase.seccionId;
     }
-    return numbers;
+    console.log(this.nombreAsignatura);
+    console.log(this.nombreSeccion);
+
+    // Obtiene los alumnos por sección
+    this.AlumnosPorSeccion = this.hh.alumnoPorSeccion(this.nombreAsignatura, this.nombreSeccion);
+
+    // Carga las asistencias y filtra por fecha
+    this.AlumnosPorSeccion.subscribe(data => {
+      for (let alumno of data) {
+        this.hh.asistenciaAlumno(this.nombreAsignatura, this.nombreSeccion, alumno.id).subscribe(asistencias => {
+          // Filtra las asistencias según la fecha
+          const asistenciasFiltradas = asistencias.filter(asistencia => {
+            const fechaAsistencia = asistencia.Fecha.toDate();
+            fechaAsistencia.setHours(0, 0, 0, 0); // Asegura que la hora sea 00:00:00
+            return fechaAsistencia.getTime() === this.hoy.getTime();
+          });
+          // Guarda las asistencias filtradas
+          this.AsistenciaPorAlumno[alumno.id] = asistenciasFiltradas;
+        });
+      }
+    });
   }
+
+ // Método para registrar asistencia
+ registrarAsistencia(alumnoNombre:string,IdClase:string,estado: string) {
+  //Hizo El cambio para dejarlo presente
+  if (estado === "Presente") {
+    this.aas.registrarAsentenciaPresente(this.nombreAsignatura, this.nombreSeccion, alumnoNombre, IdClase)
+  }else{
+    this.aas.eliminarAsentenciaPresente(this.nombreAsignatura, this.nombreSeccion, alumnoNombre, IdClase)
+  }
+
+
+  
+/* -------------------------------------------------------------------------- */ 
+
+}
 }

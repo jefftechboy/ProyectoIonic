@@ -4,6 +4,8 @@ import { QrCodeModule } from 'ng-qrcode'
 import {  OnInit } from '@angular/core';
 import { AsistenciaAlumnoService } from 'src/app/servicios/asistencia/asistencia-alumno.service';
 import { Observable } from 'rxjs';
+import { CursoDocenteService } from 'src/app/servicios/detalle/curso-docente.service';
+import { ClaseActualService } from 'src/app/servicios/clase/clase-actual.service';
 @Component({
   selector: 'app-qr-docente-lectura',
   templateUrl: './qr-docente-lectura.page.html',
@@ -16,17 +18,23 @@ export class QrDocenteLecturaPage {
 
   constructor(
     private navController: NavController,
-    public QRinfor:AsistenciaAlumnoService
+    public QRinfor:AsistenciaAlumnoService,
+    public ds:CursoDocenteService,
+    public hh:ClaseActualService,
   ) { }
   
-  public datosAsignatura: string[] =  [
-    this.QRinfor.asignatura,
-    this.QRinfor.fecha,
-    this.QRinfor.seccion,
+  public datosAsignaturaDocente: string[] = [
+    this.hh.asignaturaNombre,
+    this.hh.seccionNombre,
+    this.hh.dia,
+    this.hh.horaInicio,
+    this.hh.horaFin
   ];
-
-// Convertir a una cadena JSON
-public datosAsignaturaJSON: string = JSON.stringify(this.datosAsignatura);
+  
+  // Generar el arreglo en formato JSON
+  public datosAsignaturaJSON: string = JSON.stringify(this.datosAsignaturaDocente);
+  
+  
 
   iniciarTemporizador() {
     this.tiempoRestante = 10; // 300 segundos (5 minutos)

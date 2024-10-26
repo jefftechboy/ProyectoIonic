@@ -27,30 +27,42 @@
       </div>
     </div>
   </div>
+
+  <ion-list>
+    <ion-item *ngFor="let alumno of AlumnosPorSeccion | async" lines="full">
+      <ion-label>
+        <p>{{ alumno.id }}</p>
+      </ion-label>
   
-  <!-- CICLO ALUMNOS -->
-  <div *ngFor="let k of alumno | async" style="width: 100%;">
-    <ion-item class="botonListadoCursoAlumno" style="border-bottom: 1px solid black;">
-      <ion-grid>
-        <ion-row>
-          <ion-col size="8">
-            <h5>
-              Alumno {{ k.id }}
-            </h5>
-          </ion-col>
-          <ion-col size="1"></ion-col>
-          <ion-col size="3" style="text-align: right;">
-            <div *ngIf="k.id % 2 == 0; else Ausente">
-              <ion-toggle [checked]="true" [disabled]="false"></ion-toggle>
-            </div>
-            <ng-template #Ausente>
-              <ion-toggle [checked]="false" [disabled]="false"></ion-toggle>
-            </ng-template>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
+      <ion-list *ngIf="AsistenciaPorAlumno[alumno.id]">
+        <ion-item *ngFor="let asistencia of AsistenciaPorAlumno[alumno.id]">
+            <ion-toggle 
+              [checked]="(AsistenciaPorAlumno[alumno.id]?.[0]?.Estado === 'Presente')" 
+              [ngStyle]="{
+                '--background': (AsistenciaPorAlumno[alumno.id]?.[0]?.Estado === 'Ausente' || AsistenciaPorAlumno[alumno.id]?.[0]?.Estado === 'Pendiente') ? 'red' : 'green'
+              }"
+              (ionChange)="registrarAsistencia( alumno.id  ,asistencia.id,$event.detail.checked ? 'Presente' : 'Ausente')"
+              [disabled]="false"> <!-- Asegúrate de que este valor sea falso para habilitar el toggle -->
+            </ion-toggle>
+          <ion-label>
+            <div *ngIf="asistencia.Estado === 'Pendiente' || asistencia.Estado === 'Ausente'">
+              <p>Ausente</p>
+            </div> 
+            <div *ngIf="asistencia.Estado === 'Presente'">
+              <p>Presente</p>
+            </div> 
+          </ion-label>
+        </ion-item>
+      </ion-list>
+  
+      <p *ngIf="!(AsistenciaPorAlumno[alumno.id] && AsistenciaPorAlumno[alumno.id].length)">
+        No hay asistencia registrada para hoy.
+      </p>
     </ion-item>
-  </div>
+  </ion-list>
+  
+  
+  
   
   <!-- Registro de asistencia -->
   <div>
@@ -61,6 +73,7 @@
     </ion-button>
   </div>
 </ion-card>
+
 
 
 

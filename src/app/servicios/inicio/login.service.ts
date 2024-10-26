@@ -16,7 +16,7 @@ export class LoginService {
 
   constructor(private afs:AngularFirestore) { }
 
-  public nombreAlumno:String=""
+  public nombreAlumno:string=""
   public tipoUsuario:String=""
 
   login(nombreUsuario:String,contraseña:String){

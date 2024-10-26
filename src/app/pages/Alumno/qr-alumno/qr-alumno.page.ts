@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { AlertController, NavController } from '@ionic/angular';
 import { Router } from '@angular/router';
+import { AsistenciaAlumnoService } from 'src/app/servicios/asistencia/asistencia-alumno.service';
+
+
 
 @Component({
   selector: 'app-qr-alumno',
@@ -9,9 +12,13 @@ import { Router } from '@angular/router';
 })
 export class QrAlumnoPage implements OnInit {
 
-  constructor(private alertController: AlertController, private navCtrl: NavController, private router: Router) { 
+  constructor(
+    private alertController: AlertController, 
+    private navCtrl: NavController, 
+    private router: Router,
+    public QRinfor:AsistenciaAlumnoService
+  ) { 
     
-
   }
   ngOnInit() {
   }

@@ -35,19 +35,13 @@ export class HomePage implements OnInit {
   ];
 
 
-
-
-  usuario: string = '';
-  profileCode: string = '';
-
   constructor(
     private router: Router,
     private menuController: MenuController,
     private navController: NavController,
     public aa:LoginService,
     public hh:ClaseActualService,
-    private asignaturaService: AsistenciaAlumnoService,
-    private afs:AngularFirestore
+    public asistenciaAlumnoService:AsistenciaAlumnoService
   ) {}
 
   navigateAndClose(path: string) {
@@ -68,7 +62,8 @@ export class HomePage implements OnInit {
   secciones: Observable<any[]>; // Cambia a un observable
   alumnos: Observable<any[]>; // Cambia a un observable
   horario: Observable<any[]>; // Cambia a un observable
-
+  
+  // Contiene todas las asignaturas del alumno
   vecesCombinadas: { 
     alumnoId: string, 
     asignaturaId: string, 
@@ -76,7 +71,8 @@ export class HomePage implements OnInit {
     dia: string,
     horaInicio: string,
     horaFin: string }[] = [];
-
+   
+  // Contiene la asignatura en proceso para ALUMNO
   claseEnProceso: { 
     alumnoId: string, 
     asignaturaId: string, 
@@ -84,14 +80,15 @@ export class HomePage implements OnInit {
     dia: string,
     horaInicio: string,
     horaFin: string }[] = [];
-
+    
+  // Contiene la asignatura en proceso para DOCENTE
   claseActualDocente: { 
     asignaturaId: string, 
     seccionId: string,
     dia: string,
     horaInicio: string,
     horaFin: string }[] = [];
-
+  // Contiene todas las asignaturas del DOCENTE
   claseProcesoDocente: { 
     asignaturaId: string, 
     seccionId: string,
@@ -99,7 +96,7 @@ export class HomePage implements OnInit {
     horaInicio: string,
     horaFin: string }[] = [];
 
-   //Coleccion segun alumno
+   //Metodo todas asignaturas de un alumno
    claseEnProcesoAlumno() {
     this.asignaturas = this.hh.TodasLasAsignaturas();
     this.asignaturas.subscribe(asignaturas => {
@@ -142,7 +139,7 @@ export class HomePage implements OnInit {
     });
   }
   
-  //Coleccion segun alumno
+  //Metodo todas asignaturas de un docente
   claseEnProcesoDocente() {
     this.asignaturas = this.hh.TodasLasAsignaturas();
     this.asignaturas.subscribe(asignaturas => {
@@ -175,22 +172,20 @@ export class HomePage implements OnInit {
       }
     });
   }
-
+  // metodo que verifica el horario de asignatura y el sistema para los ALUMNOS 
   claseEnProcesoMetodo() {
-    this.claseEnProceso = []; // Limpiar el array al inicio
+    this.claseEnProceso = []; 
     for (const item of this.vecesCombinadas) {  
-        console.log((item.dia+item.horaInicio+item.horaFin))
-        console.log(this.hh.verificarHorario(item.dia,item.horaInicio,item.horaFin))
         if (this.hh.verificarHorario(item.dia,item.horaInicio,item.horaFin)) {
           this.claseEnProceso.push(item);
+          this.asistenciaAlumnoService.claseActualAlumno.push(item);
         }
     }
   }
+  // metodo que verifica el horario de asignatura y el sistema para los DOCENTE 
   claseEnProcesoMetodoDocente() {
-    this.claseActualDocente = []; // Limpiar el array al inicio
+    this.claseActualDocente = []; 
     for (const item of this.claseProcesoDocente) {  
-        console.log((item.dia+item.horaInicio+item.horaFin))
-        console.log(this.hh.verificarHorario(item.dia,item.horaInicio,item.horaFin))
         if (this.hh.verificarHorario(item.dia,item.horaInicio,item.horaFin)) {
           this.claseActualDocente.push(item);
         }

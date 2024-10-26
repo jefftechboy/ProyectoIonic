@@ -7,6 +7,7 @@ import { AsistenciaAlumnoService } from 'src/app/servicios/asistencia/asistencia
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Observable } from 'rxjs';
 import { NavController } from '@ionic/angular';
+import { CursoDocenteService } from 'src/app/servicios/detalle/curso-docente.service';
 @Component({
   selector: 'app-qr-docente',
   templateUrl: './qr-docente.page.html',
@@ -21,22 +22,23 @@ export class QrDocentePage implements OnInit {
     public aa:LoginService,
     public hh:ClaseActualService,
     private asignaturaService: AsistenciaAlumnoService,
-    private afs:AngularFirestore
-
+    private afs:AngularFirestore,
+    public ds:CursoDocenteService,
   ) { }
 
   ngOnInit() {
     this.claseEnProcesoDocente();
   }
-
   nombreUsuario:String= this.aa.nombreAlumno;
+  nombreDocente:string= this.aa.nombreAlumno.toString();
+
+  
   asignaturas: Observable<any[]>; // Cambia a un observable
   secciones: Observable<any[]>; // Cambia a un observable
   alumnos: Observable<any[]>; // Cambia a un observable
   horario: Observable<any[]>; // Cambia a un observable
 
 
-  
 
 
   claseActualDocente: { 
@@ -76,8 +78,8 @@ claseEnProcesoDocente() {
                   horaFin: hora["Hora Fin"]
 
                 });
-                this.asignaturaService.asignatura = asignatura.id;
-                this.asignaturaService.seccion = seccion.id;
+                
+                
               }
               // Llama a claseEnProcesoMetodo aquí, después de llenar vecesCombinadas
               this.claseEnProcesoMetodoDocente();
@@ -96,6 +98,12 @@ claseEnProcesoDocente() {
         console.log(this.hh.verificarHorario(item.dia,item.horaInicio,item.horaFin))
         if (this.hh.verificarHorario(item.dia,item.horaInicio,item.horaFin)) {
           this.claseActualDocente.push(item);
+          //DATOS A ENTREGAR EN EL QR
+          this.hh.asignaturaNombre = item.asignaturaId;
+          this.hh.seccionNombre = item.seccionId;
+          this.hh.dia = item.dia;
+          this.hh.horaInicio = item.horaInicio;
+          this.hh.horaFin = item.horaFin;
         }
     }
   }
