@@ -4,7 +4,7 @@
   "compilerOptions": {
     "strictPropertyInitialization": false,
     "baseUrl": "./",
-    "outDir": "./dist/out-tsc",
+    "outDir": "registrapp/API/ts-api/dist/out-tsc",
     "forceConsistentCasingInFileNames": true,
     "strict": true,
     "noImplicitOverride": true,
@@ -17,8 +17,10 @@
     "experimentalDecorators": true,
     "moduleResolution": "node",
     "importHelpers": true,
-    "target": "es2022",
-    "module": "es2020",
+    "target": "es2022",                 // Esto está bien, puedes dejarlo así
+    "module": "es2020",                  // Asegúrate de que sea "es2020" o superior
+    "allowSyntheticDefaultImports": true, // Ya está agregado, correcto
+    "esModuleInterop": true,             // Agrega esta línea para la interopabilidad
     "lib": [
       "es2018", 
       "dom"

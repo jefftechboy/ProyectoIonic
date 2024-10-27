@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "author": "Ionic Framework",
   "homepage": "https://ionicframework.com/",
+  "type": "module",  
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -33,7 +34,10 @@
     "@capacitor/status-bar": "6.0.1",
     "@ionic/angular": "^8.0.0",
     "@zxing/browser": "^0.1.5",
+    "body-parser": "^1.20.3",
+    "express": "^4.21.1",
     "firebase": "^10.14.1",
+    "firebase-admin": "^12.7.0",
     "ionicons": "^7.0.0",
     "ng-qrcode": "^18.0.0",
     "rxjs": "~7.8.0",

@@ -25,4 +25,25 @@ export class LoginService {
       .where("Contrasena", "==", contraseña)).valueChanges();
   }
 
+  updatePasswordInFirestore(nombreUsuario: string, nuevaContrasena: string): Promise<void> {
+    return this.afs.collection("Usuarios", ref => ref.where("Usuario", "==", nombreUsuario))
+      .get()
+      .toPromise()
+      .then(querySnapshot => {
+        if (querySnapshot && !querySnapshot.empty) {
+          querySnapshot.forEach(doc => {
+            doc.ref.update({ Contrasena: nuevaContrasena });
+          });
+        } else {
+          console.error("No se encontraron usuarios con el nombre de usuario proporcionado.");
+          throw new Error("Usuario no encontrado.");
+        }
+      })
+      .catch(error => {
+        console.error("Error al actualizar la contraseña en Firestore:", error);
+        throw error;
+      });
+  }
+
+
 }

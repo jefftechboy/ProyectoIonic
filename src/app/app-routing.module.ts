@@ -25,14 +25,6 @@ const routes: Routes = [
   },
 
   {
-    path: 'codigocont',
-    loadChildren: () => import('./pages/Inicio/codigocont/codigocont.module').then( m => m.CodigocontPageModule)
-  },
-  {
-    path: 'cambioContraseña',
-    loadChildren: () => import('./pages/Inicio/cambcont/cambcont.module').then( m => m.CambcontPageModule)
-  },
-  {
     path: 'listadoCursoDocente',
     loadChildren: () => import('./pages/Docente/listado-curso-docente/listado-curso-docente.module').then( m => m.ListadoCursoDocentePageModule)
   },

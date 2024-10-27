@@ -1,16 +1,56 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <img src="../../../assets/img/logoDuoc.png" alt="">
+    <img src="../../../assets/img/logoDuoc.png" alt="Duoc UC" />
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-list expand="block" >
-    <ion-item expand="block" > 
-        <ion-input class="loginItem" label="Ingresa correo" placeholder="Ingresa correo Duoc UC" ></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-button  class="login" expand="block" routerLink="/codigocont">Generar codigo</ion-button>
-    </ion-item>
-  </ion-list>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title><strong>Cambiar Contraseña</strong></ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-list>
+        <ion-item>
+          <ion-label position="stacked" style="padding: 5px;"><strong>Usuario</strong></ion-label>
+          <ion-input
+            [(ngModel)]="usuario"
+            style="color: rgb(255, 255, 255);" placeholder="Ingresa tu usuario registrado"
+            type="text"
+            class="input-field"
+          ></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="stacked" style="padding: 5px;"><strong>Nueva Contraseña</strong></ion-label>
+          <ion-input
+            [(ngModel)]="nuevaContrasena"
+            style="color: rgb(255, 255, 255);" placeholder="Ingresa tu nueva contraseña"
+            type="password"
+            class="input-field"
+          ></ion-input>
+        </ion-item>
+
+        
+        <ion-button
+          expand="block"
+          color="primary"
+          (click)="actualizarContrasena()"
+          
+        >
+          Actualizar Contraseña
+        </ion-button>
+
+        <ion-button
+          expand="block"
+          color="primary"
+          routerLink="/login"
+          
+        >
+          Volver al Login
+        </ion-button>
+      
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
 </ion-content>
