@@ -6,28 +6,29 @@
 
 <ion-content [fullscreen]="true">
   <ion-card>
-    <ion-card-header>
-      <ion-card-title><strong>Cambiar Contraseña</strong></ion-card-title>
+    <ion-card-header style="text-align: center;">
+      <ion-card-title><strong  >Cambiar Contraseña</strong></ion-card-title>
     </ion-card-header>
     <ion-card-content>
       <ion-list>
         <ion-item>
-          <ion-label position="stacked" style="padding: 5px;"><strong>Usuario</strong></ion-label>
+          <ion-label position="stacked" style="padding: 5px;"><strong></strong></ion-label>
           <ion-input
             [(ngModel)]="usuario"
-            style="color: rgb(255, 255, 255);" placeholder="Ingresa tu usuario registrado"
+            style="color: rgb(255, 255, 255);" placeholder="Ingresa tu usuario"
             type="text"
             class="input-field"
           ></ion-input>
         </ion-item>
 
         <ion-item>
-          <ion-label position="stacked" style="padding: 5px;"><strong>Nueva Contraseña</strong></ion-label>
+          <ion-label position="stacked" style="padding: 5px;"><strong></strong></ion-label>
           <ion-input
             [(ngModel)]="nuevaContrasena"
-            style="color: rgb(255, 255, 255);" placeholder="Ingresa tu nueva contraseña"
+            style="color: rgb(255, 255, 255);" placeholder="Ingresa nueva contraseña"
             type="password"
             class="input-field"
+            
           ></ion-input>
         </ion-item>
 
@@ -35,9 +36,7 @@
         <ion-button
           expand="block"
           color="primary"
-          (click)="actualizarContrasena()"
-          
-        >
+          (click)="mostrarAlert()"> <!-- Llama a mostrarAlert() -->
           Actualizar Contraseña
         </ion-button>
 
@@ -53,4 +52,6 @@
       </ion-list>
     </ion-card-content>
   </ion-card>
+
+
 </ion-content>

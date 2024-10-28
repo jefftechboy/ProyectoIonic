@@ -34,16 +34,18 @@ export class LoginService {
           querySnapshot.forEach(doc => {
             doc.ref.update({ Contrasena: nuevaContrasena });
           });
-        } else {
-          console.error("No se encontraron usuarios con el nombre de usuario proporcionado.");
-          throw new Error("Usuario no encontrado.");
         }
       })
-      .catch(error => {
-        console.error("Error al actualizar la contraseña en Firestore:", error);
-        throw error;
-      });
+
   }
 
+
+
+  
+  SolicitudCodigoSeguridad(NombreUsuario:string){
+    return this.afs.collection("Usuarios", 
+      ref => ref.where("Usuario", "==", NombreUsuario))
+      .valueChanges();
+  }
 
 }
