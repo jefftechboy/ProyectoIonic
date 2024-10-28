@@ -6,6 +6,8 @@ import { AsistenciaAlumnoService } from 'src/app/servicios/asistencia/asistencia
 import { Observable } from 'rxjs';
 import { CursoDocenteService } from 'src/app/servicios/detalle/curso-docente.service';
 import { ClaseActualService } from 'src/app/servicios/clase/clase-actual.service';
+import { Geolocation } from '@ionic-native/geolocation/ngx';
+
 @Component({
   selector: 'app-qr-docente-lectura',
   templateUrl: './qr-docente-lectura.page.html',
@@ -21,6 +23,7 @@ export class QrDocenteLecturaPage {
     public QRinfor:AsistenciaAlumnoService,
     public ds:CursoDocenteService,
     public hh:ClaseActualService,
+    private geolocation: Geolocation,
   ) { }
   
   public datosAsignaturaDocente: string[] = [
@@ -60,8 +63,33 @@ export class QrDocenteLecturaPage {
   }
   ngOnInit() {
     this.iniciarTemporizador();
+    this. obtenerUbicacion()
 
   }
-  
+  obtenerUbicacion() {
+    this.geolocation.getCurrentPosition().then((resp) => {
+      const latitude = resp.coords.latitude;
+      const longitude = resp.coords.longitude;
+
+      console.log('Latitud:', latitude);
+      console.log('Longitud:', longitude);
+
+      // Agregar latitud y longitud al arreglo
+      this.datosAsignaturaDocente = [
+        this.hh.asignaturaNombre,
+        this.hh.seccionNombre,
+        this.hh.dia,
+        this.hh.horaInicio,
+        this.hh.horaFin,
+        latitude.toString(), // Convertir a string
+        longitude.toString() // Convertir a string
+      ];
+      console.log(this.datosAsignaturaDocente);
+      console.log(this.datosAsignaturaDocente[5]);
+      console.log(this.datosAsignaturaDocente[6]);
+      // Generar el arreglo en formato JSON
+      this.datosAsignaturaJSON = JSON.stringify(this.datosAsignaturaDocente);
+    })
+  }
 
 }

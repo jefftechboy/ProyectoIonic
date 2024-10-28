@@ -19,6 +19,7 @@ import { FormsModule } from '@angular/forms';
 import { LoginPageRoutingModule } from './login-routing.module';
 import { AsistenciaAlumnoService } from 'src/app/servicios/asistencia/asistencia-alumno.service';
 import { LoginService } from 'src/app/servicios/inicio/login.service';
+import { Geolocation } from '@ionic-native/geolocation/ngx';
 
 
 
@@ -47,7 +48,9 @@ export class AppModule {}
 export class LoginPage implements OnInit {
 
   constructor(private alertController: AlertController,
-    private navCtrl: NavController, public aa:LoginService
+    private navCtrl: NavController, 
+    public aa:LoginService,
+    private geolocation: Geolocation
   ) { }
   
   hide = true; // Esta es una propiedad
@@ -65,7 +68,14 @@ export class LoginPage implements OnInit {
   }
 
 
-
+  obtenerUbicacion() {
+    this.geolocation.getCurrentPosition().then((resp) => {
+      console.log('Latitud:', resp.coords.latitude);
+      console.log('Longitud:', resp.coords.longitude);
+    }).catch((error) => {
+      console.error('Error al obtener la ubicación', error);
+    });
+  }
 
   validar() {
     this.aa.login(this.usuario, this.contrasena).subscribe(data => {
