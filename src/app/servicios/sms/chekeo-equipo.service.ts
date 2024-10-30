@@ -6,7 +6,7 @@ import axios from 'axios';
 })
 export class ChekeoEquipoService {
   private accountSid = 'ACe3a563fe0c5eca7fac95a14b45b31e38'; // Reemplaza con tu Account SID
-  private authToken = '0c7d13e69932edf6ea810e29db0b4ba5';   // Reemplaza con tu Auth Token
+  private authToken = 'b36bbe52b66643fa9edbe81746268639';   // Reemplaza con tu Auth Token
   private twilioPhoneNumber = '+15129829522'; // Tu número de Twilio
   constructor() { }
 
