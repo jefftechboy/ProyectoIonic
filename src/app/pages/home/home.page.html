@@ -3,7 +3,7 @@
   <!-- Cabezera del menu -->
   <ion-header>
     <ion-toolbar id="cabezeraMenu" >
-      <ion-title class="NombreUsuario" >{{ aa.tipoUsuario }}</ion-title>
+      <h4 class="NombreUsuario"  style="text-align: center;">{{ aa.tipoUsuario }}</h4>
     </ion-toolbar>
   </ion-header>
   <!-- Cuerpo del menu -->
@@ -22,7 +22,7 @@
     </ion-list>
   </ion-content>
   <!-- Pie del menu -->
-  <ion-footer  id="PieMenu">
+  <ion-footer id ="CerrarSesion" >
     <ion-list>
       <ion-item >
         <ion-grid>
@@ -63,7 +63,7 @@
 
 <ion-content [fullscreen]="true">
   <!-- HOLA + NOMBRE + FOTO -->
-  <div style="padding-top: 100px;">
+  <div style="padding-top: 130px;margin-bottom: 30px;">
       <h1 style="text-align: center;">Hola {{aa.nombreAlumno}} </h1>
   </div>
 <!-- Clase en proceso -->

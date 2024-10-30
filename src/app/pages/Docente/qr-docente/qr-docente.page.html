@@ -28,6 +28,16 @@
         </div>
       </div>
     </div>
+    <ion-card class="ion-text-center">
+      <ion-card-content>
+        <ion-button expand="block" style="--background: #1A1A1A; --color: white;" 
+          routerLink="/generarQrDocente">
+          <h1>
+            Generar QR
+          </h1>
+        </ion-button>
+      </ion-card-content>
+    </ion-card>
   </div>
   <!-- Card para cuando no hay clases -->
   <ng-template #noData>
@@ -38,15 +48,15 @@
         <p>Por favor, vuelve más tarde para ver las próximas clases.</p>
       </div>
     </div>
+    <ion-card class="ion-text-center">
+      <ion-card-content>
+        <ion-button [disabled]="true" expand="block" style="--background: #1A1A1A; --color: white;" 
+          routerLink="/generarQrDocente">
+          <h1>
+            Generar QR
+          </h1>
+        </ion-button>
+      </ion-card-content>
+    </ion-card>
   </ng-template>
-  <ion-card class="ion-text-center">
-    <ion-card-content>
-      <ion-button expand="block" style="--background: #1A1A1A; --color: white;" 
-        routerLink="/generarQrDocente">
-        <h1>
-          Generar QR
-        </h1>
-      </ion-button>
-    </ion-card-content>
-  </ion-card>
 </ion-content>

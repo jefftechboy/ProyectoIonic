@@ -7,23 +7,22 @@
         </ion-button>
       </ion-col>  
       <ion-col size="10">
-        <h2 style="text-align: left; color: white;" >Asistencias Asignaturas</h2>
+        <h5 style="text-align: left;" >Asistencias Asignaturas</h5>
       </ion-col>  
     </ion-row>
   </ion-grid>
+  
 </ion-header>
-
-<ion-content [fullscreen]="true"  style="color: white">
-  <ion-list *ngFor="let curso of TodaAsignatura">
-    <ion-item *ngFor="let secc of SeccionesPorAsignatura[(curso.id)]" class="asistenciaAsignaturasItems"
-    size="large" 
-    expand="full" 
-    style="border-bottom: 1px solid black; --color: #1A1A1A;"
-    (click)="guardarDatosAsignatura(curso.id, secc.id, secc.Profesor)" >
-      {{ this.lg.nombreAlumno }}
-      {{ curso.id }}
-      {{ secc.id }}
-      {{ secc.Profesor }}
-    </ion-item> 
-  </ion-list>
+<ion-content [fullscreen]="true">
+    <div *ngFor="let curso of TodaAsignatura">
+      <div *ngFor="let secc of SeccionesPorAsignatura[(curso.id)]" class="asistenciaAsignaturasItems">
+        <ion-item expand="full" class="center-item" (click)="guardarDatosAsignatura(curso.id, secc.id, secc.Profesor)">
+          <ion-card class="centered-card">
+            <ion-card-header>
+              {{ curso.id }} - {{ secc.id }}
+            </ion-card-header>
+          </ion-card>
+        </ion-item>
+      </div>
+    </div>
 </ion-content>

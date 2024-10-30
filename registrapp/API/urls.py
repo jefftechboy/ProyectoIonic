@@ -19,7 +19,7 @@ from .views import *
 from rest_framework.urlpatterns import format_suffix_patterns
 
 urlpatterns = [
-    url(r'^api/usuario/$', UsuarioViewSet.as_view()),
-    url(r'^api/persona/$', PersonaViewSet.as_view())
+    url(r'api/seguridad/', SeguridadCodigosViewSet.as_view()),  # Para listar y crear usuarios
+    
 ]
 urlpatterns = format_suffix_patterns(urlpatterns)

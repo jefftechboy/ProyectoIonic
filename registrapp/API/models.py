@@ -1,19 +1,17 @@
 from django.db import models
 
 # Create your models here.
-class Usario(models.Model):
+class Usuario(models.Model):
     id = models.AutoField(primary_key=True)
-    nombre = models.CharField(max_length=45,null=False)
-    apellido = models.CharField(max_length=50,default='S/A')
-    edad = models.IntegerField()
-
+    Correo = models.CharField(max_length=50,null=False)
+    CodigoSeguridad = models.CharField(max_length=50,null=False)
     def __str__(self) -> str:
-        return self.nombre
+        return self.Correo
     
-class Persona(models.Model):
+class SeguridadCodigos(models.Model):
     id = models.AutoField(primary_key=True)
-    nombre = models.CharField(max_length=45,null=False)
-    apellido = models.CharField(max_length=50,default='S/A')
-
+    Correo = models.CharField(max_length=50,null=False)
+    CodigoSeguridad = models.CharField(max_length=50,null=False)
+    Telefono = models.CharField(max_length=50,null=False)
     def __str__(self) -> str:
-        return self.nombre + " " + self.apellido
+        return self.Correo

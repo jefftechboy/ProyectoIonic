@@ -15,35 +15,48 @@
 </ion-header>
 
 
-<ion-content [fullscreen]="true" style="text-align: center;">
-  <ion-card  style="margin-top: 30px;"  class="cartaClaseEnProceso" >
-    <ion-card-header>
-      <ion-card-title>
-        <h1 class="TextoClaseProcesoTitulos">
-          Asignatura en Proceso
-        </h1>
-      </ion-card-title>
-    </ion-card-header>
-
-    <ion-card-content>
-      <h1   class="TextoClaseProcesoTitulos" >
-        Aplicaciones Moviles
-      </h1>
-      <ion-button class="botonHorarioClase">
-        <h2>
-          Lunes: 08:30 - 09:50
-        </h2>
-      </ion-button>
-    </ion-card-content>
-  </ion-card>
-  <ion-button  class="botonLecturaQrAlumno" expand="block"
-      (click)="presentAlert()">
+<ion-content [fullscreen]="true">
+  <!-- Clase en proceso -->
+  <div *ngIf="claseEnProceso.length > 0; else noData" class="clase-container">
+    <div *ngFor="let a of claseEnProceso" class="clase-card" style="margin-top: 70px;">
+      <h1 class="titulo-card">Clase en Progreso</h1>
+      <div class="clase-header">
+        <h2>{{ a.asignaturaId }}</h2>
+        <span class="asignatura">{{ a.seccionId }}</span>
+      </div>
+      <div class="clase-body">
+        <p><strong>Día:</strong> {{ a.dia }}</p>
+        <div class="horario">
+          <p><strong>Inicio:</strong> {{ a.horaInicio }}</p>
+          <p><strong>Fin:</strong> {{ a.horaFin }}</p>
+        </div>
+      </div>
+    </div>
+    <ion-button   [disabled]="false" style="--background: #1A1A1A; --color: white;" expand="block"
+      (click)="sendSMS()">
     <h1>
       Leer QR
     </h1>
   </ion-button>
+  </div>
 
 
-
-</ion-content>
-
+  <!-- Card para cuando no hay clases -->
+  <ng-template #noData>
+    <div class="no-clase-card" style="margin-top: 70px;">
+      <h1 class="titulo-card">Clase en Progreso</h1>
+      <div class="no-clase-content">
+        <h2>No hay clases en progreso</h2>
+        <p>Por favor, vuelve más tarde para ver las próximas clases.</p>
+      </div>
+    </div>
+    <ion-button   [disabled]="true" style="--background: #1A1A1A; --color: white;" expand="block"
+      (click)="sendSMS()">
+    <h1>
+      Leer QR
+    </h1>
+  </ion-button>
+  </ng-template>
+  
+  
+  </ion-content>

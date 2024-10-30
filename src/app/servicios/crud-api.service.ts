@@ -10,13 +10,12 @@ export class CrudApiService {
 
   constructor(private http:HttpClient,private firestore: AngularFirestore) { }
 
-  rutaapi = "https://jefftechboy.pythonanywhere.com/api/usuario/"
+  rutaapi = "https://jeffryzxc.pythonanywhere.com/api/seguridad/"
 
-  getPersona():Observable<any>{
+  getUsuarios():Observable<any>{
     return this.http.get(this.rutaapi).pipe(retry(3))
   }
 
-
-
+ 
   
 }

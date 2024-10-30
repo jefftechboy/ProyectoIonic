@@ -40,16 +40,20 @@ export class QrAlumnoLecturaPage implements AfterViewInit {
 
   async requestPermissions() {
     try {
-      await this.geolocation.getCurrentPosition();
-      // Solicita permiso de cámara
-      const videoConstraints = { video: { facingMode: 'environment' } };
-      await navigator.mediaDevices.getUserMedia(videoConstraints);
+       const stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: 'environment' } });
+       if (!stream) {
+           throw new Error('No se pudo acceder a la cámara.');
+       }
+       this.qrReader.decodeOnceFromStream(stream, 'QR').then(result => {
+           console.log(result.getText());
+       });
     } catch (error) {
-      console.error('Error solicitando permisos:', error);
-      this.mostrarToast('Se requieren permisos de cámara y geolocalización.', 'danger');
-      this.nav.navigateBack('/home'); // Redirige si no se otorgan permisos
+       console.error('Error solicitando permisos:', error);
+       this.mostrarToast('Se requieren permisos de cámara y geolocalización.', 'danger');
+       this.nav.navigateBack('/home');
     }
-  }
+ }
+ 
 
   clasesalum: any[]=[]
   public mismaAsignatura:boolean = false;

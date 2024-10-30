@@ -8,28 +8,18 @@
         </ion-button>
       </ion-col>  
       <ion-col size="10">
-        <h2 style="text-align: left;" >Applicaciones Moviles</h2>
+        <h4 style="text-align: left;" >Seccion {{ this.dc.seccionDocente }}</h4>
       </ion-col>  
     </ion-row>
   </ion-grid>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-
-  <!-- Título -->
-  <ion-header>
-    <ion-toolbar>
-      <ion-title>
-        {{ this.dc.nombreDocente }} - {{ this.dc.seccionDocente }}
-      </ion-title>
-    </ion-toolbar>
-  </ion-header>
-
   <!-- Lista de alumnos -->
   <ion-list>
     <div *ngFor="let s of AlumnosPorSeccion">
       <ion-item button (click)="openModal(s.id)">
-        {{ s.id }} - {{ calcularPorcentajePresencias(s.id) }}
+        {{ s.id }} - {{ calcularPorcentajePresencias(s.id) }} - {{ this.estadoAsistencioa }}
       </ion-item>
     </div>
   </ion-list>
@@ -39,7 +29,7 @@
     <ng-template>
       <ion-header>
         <ion-toolbar>
-          <h4>Asistencia de {{ selectedId }}</h4>
+          <h4 style="text-align: center;" >Detalle Asistencia</h4>
           <ion-buttons slot="end">
             <ion-button (click)="closeModal()">Cerrar</ion-button>
           </ion-buttons>
@@ -73,7 +63,6 @@
           </ion-row>
         </ion-grid>
         
-
 
 
 

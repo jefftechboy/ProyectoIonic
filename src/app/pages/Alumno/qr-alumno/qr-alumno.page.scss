@@ -1,28 +1,91 @@
-.cartaClaseEnProceso{
-  background-color: #FFB800;
-  margin-top: 20px;
-  width: 90%; 
-  margin:0 auto;
-  color: #003366;
-}
-.botonHorarioClase{
-  --background: #1A1A1A;
-  color: white;
-  margin-top: 30px;
-}
-.botonLecturaQrAlumno{
-  --background: #003366; 
-  --color: white;
-  width: 80%;
-  margin: 0 auto;
-  margin-top: 20px;
-  height: 30px;
-}
-.TextoClaseProcesoTitulos{
-  text-align: center;
-  color:#003366;
-  font-weight: bold; 
-}
 #CabezaHeader{
 background-color: #1A1A1A;
 }
+
+/* Contenedor general */
+.clase-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f0f4f8;
+}
+
+/* Tarjetas de clases */
+.clase-card {
+  background-color: #ffffff;
+  border-radius: 15px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+  padding: 25px;
+  position: relative;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.clase-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.titulo-card {
+  text-align: center;
+  font-size: 24px;
+  color: #34495e;
+  margin-bottom: 15px;
+  border-bottom: 2px solid #1abc9c;
+  padding-bottom: 10px;
+}
+
+.clase-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.clase-header h2 {
+  font-size: 20px;
+  color: #2c3e50;
+}
+
+.asignatura {
+  background-color: #1abc9c;
+  color: white;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-weight: bold;
+}
+
+.clase-body p {
+  font-size: 16px;
+  color: #7f8c8d;
+  margin: 10px 0;
+}
+
+.horario {
+  display: flex;
+  justify-content: space-between;
+}
+
+/* Estilos para cuando no hay clases */
+.no-clase-card {
+  background-color: #ffffff;
+  border-radius: 15px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+  padding: 25px;
+  text-align: center;
+}
+
+.no-clase-content h2 {
+  font-size: 22px;
+  color: #e74c3c;
+  margin-bottom: 10px;
+}
+
+.no-clase-content p {
+  font-size: 16px;
+  color: #95a5a6;
+}
+
+

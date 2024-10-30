@@ -15,7 +15,7 @@ export class ListadoCursoDocenteDetallePage implements OnInit {
     public hh:DetalleAsistenciaService,
     private modalController: ModalController,
   ) { }
-
+  estadoAsistencioa:string='';
   AlumnosPorSeccion: any[] = [];
   // Objeto que almacenará asistencia de los alumnos por sección, usando el ID de la asignatura, el código de la sección y el ID del alumno
   asistenciaDetalle: { [key: string]: any[] } = {};
@@ -64,6 +64,13 @@ export class ListadoCursoDocenteDetallePage implements OnInit {
     const total = detalles.filter(d => d.Estado === 'Presente' ||  d.Estado === 'Ausente' ).length;
     const presentes = detalles.filter(d => d.Estado === 'Presente').length;
     const porcentaje = (presentes / total) * 100;
+    console.log(porcentaje, typeof porcentaje)
+    if(porcentaje < 70){
+      this.estadoAsistencioa = "Repitiendo";
+    }
+    if(porcentaje >= 70){
+      this.estadoAsistencioa = "Aprobando";
+    }
     return `${porcentaje.toFixed(2)}%`; // Retorna el porcentaje con 2 decimales
   }
 

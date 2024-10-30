@@ -12,3 +12,24 @@ margin-bottom: 0%;
 .AsisnaturasListado{
     border-bottom: 1px solid black; --color: #1A1A1A;
 }
+
+  
+.center-item {
+  display: flex;
+  justify-content: center; /* Center ion-card horizontally */
+  align-items: center; /* Center content vertically within item */
+  text-align: center; /* Center text inside ion-item */
+}
+
+.centered-card {
+  background-color: #FFB800; /* Yellow background */
+  border-radius: 8px; /* Rounded corners */
+  box-sizing: border-box; /* Ensures padding doesn’t affect width */
+}
+
+ion-card-header{
+    color:black;
+    padding: 20px;
+    margin: 0;
+}
+  

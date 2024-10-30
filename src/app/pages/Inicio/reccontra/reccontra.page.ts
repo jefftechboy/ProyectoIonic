@@ -3,6 +3,7 @@ import { ToastController } from '@ionic/angular';
 import { LoginService } from 'src/app/servicios/inicio/login.service';
 import { Observable } from 'rxjs';
 import { AlertController } from '@ionic/angular';
+import { CrudApiService } from 'src/app/servicios/crud-api.service';
 @Component({
   selector: 'app-reccontra',
   templateUrl: './reccontra.page.html',
@@ -12,38 +13,23 @@ import { AlertController } from '@ionic/angular';
   providedIn: 'root',
 })
 export class ReccontraPage {
-  usuario: string;
-  nuevaContrasena: string;
+  usuario: string = "";
+  nuevaContrasena: string = "";
   codigoSeguridad:string =''
 
   constructor(
     private toastController: ToastController,
     private loginService: LoginService,
-    private alertController: AlertController
+    private alertController: AlertController,
+    private CrudApiService:CrudApiService,
   ) {}
 
 
   OnInit(){
-    
   }
-  datoUsuario: any[]=[]
-  actualizarContrasena() {
-/*
-    
-    if (!this.usuario || !this.nuevaContrasena) {
-      this.mostrarToast('Por favor, completa todos los campos.', 'danger');
-      return;
-    }
 
-    try {
-      await this.loginService.updatePasswordInFirestore(this.usuario, this.nuevaContrasena);
-      this.limpiarCampos();
-      this.mostrarToast('Contraseña actualizada correctamente, Vuelve a Ingresar.', 'success');
-    } catch (error) {
-      this.mostrarToast('Error al actualizar la contraseña. Verifica los datos Ingresados.', 'danger');
-    }
-     */ 
-  }
+  datoUsuario: any[]=[]
+
 
   limpiarCampos() {
     this.usuario = '';
@@ -127,6 +113,79 @@ export class ReccontraPage {
       header: 'Error',
       message: 'Nueva contraseña no puede estar vacio',
       buttons: ['OK']
+    });
+
+    await alert.present();
+  }
+
+
+
+  ValidacionInputs(){
+      if(this.usuario === "" ){
+        console.log("Campo contraseña vacio")
+        this.mostrarToast("Usuario Invalido","danger")
+        return
+      }
+      if(this.nuevaContrasena === "" ){
+        console.log("Campo contraseña vacio")
+        this.mostrarToast("La nueva contraseña no puede ser vacio","danger")
+        return
+      }
+      this.CodigoActualizacion();
+  }
+
+
+  async CodigoActualizacion() {
+    const alert = await this.alertController.create({
+      header: 'Confirmar acción',
+      message: 'Por favor, ingresa tu información.',
+      inputs: [
+        {
+          name: 'inputField',
+          type: 'text',
+          placeholder: 'Escribe algo aquí...'
+        }
+      ],
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: () => {
+            console.log('Cancelado');
+          }
+        },
+        {
+          text: 'Aceptar',
+          handler: (data) => {
+            console.log("Aca va algo")
+            const inputFieldValue = data.inputField;
+              this.CrudApiService.getUsuarios().subscribe(data=>{
+                for (let datosApi of data) {
+                  console.log("---------------------")
+                  console.log(datosApi.Correo)
+                  console.log(datosApi.CodigoSeguridad)
+                  console.log(datosApi.CodigoSeguridad === inputFieldValue)
+                  if (this.usuario === datosApi.Correo){
+                    if (inputFieldValue !== datosApi.CodigoSeguridad){
+                      this.presentAlertError();
+                      return
+                    }
+                    if ( inputFieldValue === datosApi.CodigoSeguridad){
+                      console.log("Codigo de seguridad correcto")
+                      // VA ACTUALIZACION
+                      console.log(datosApi.Correo, " = ", this.usuario)
+                      this.loginService.updatePasswordInFirestore(this.usuario,this.nuevaContrasena);
+                      this.mostrarToast("Contraseña actualizada correctamente","success");
+                      this.limpiarCampos();
+                      return
+                    }
+                  }
+                }
+              });
+          }
+        }
+      ]
     });
 
     await alert.present();

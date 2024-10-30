@@ -49,6 +49,7 @@ export class HomePage implements OnInit {
       this.menuController.close('end'); // 'end' es el ID del menú, ajusta si es necesario
     });
   }
+  
   nombreUsuario:String= this.aa.nombreAlumno;
   ngOnInit() {
     this.claseEnProcesoAlumno();

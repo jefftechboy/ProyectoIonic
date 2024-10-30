@@ -11,7 +11,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-
+import { CrudApiService } from 'src/app/servicios/crud-api.service';
 
 
 import { CommonModule } from '@angular/common';
@@ -50,7 +50,8 @@ export class LoginPage implements OnInit {
   constructor(private alertController: AlertController,
     private navCtrl: NavController, 
     public aa:LoginService,
-    private geolocation: Geolocation
+    private geolocation: Geolocation,
+    private CrudApiService:CrudApiService,
   ) { }
   
   hide = true; // Esta es una propiedad
@@ -68,14 +69,7 @@ export class LoginPage implements OnInit {
   }
 
 
-  obtenerUbicacion() {
-    this.geolocation.getCurrentPosition().then((resp) => {
-      console.log('Latitud:', resp.coords.latitude);
-      console.log('Longitud:', resp.coords.longitude);
-    }).catch((error) => {
-      console.error('Error al obtener la ubicación', error);
-    });
-  }
+ 
 
   validar() {
     this.aa.login(this.usuario, this.contrasena).subscribe(data => {
@@ -110,4 +104,7 @@ export class LoginPage implements OnInit {
 
     await alert.present();
   }
+
+
+
 }
