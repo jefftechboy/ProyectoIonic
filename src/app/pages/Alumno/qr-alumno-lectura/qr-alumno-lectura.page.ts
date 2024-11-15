@@ -112,7 +112,11 @@ export class QrAlumnoLecturaPage implements AfterViewInit {
         this.longitudDocenteNum
       );
       console.log("Distancia entre dispositivos: ",this.distanciaEnMetros )
-
+      if( this.distanciaEnMetros > 10){        
+        this.mostrarToast('Estas fuera de la sala para esa clase', 'danger');
+        this.nav.navigateForward("/home")
+        return;
+      }
       console.log(datosRecibidos[5]);
       console.log(datosRecibidos[6]);
       datosRecibidos.forEach((dato, index) => {
@@ -212,7 +216,7 @@ export class QrAlumnoLecturaPage implements AfterViewInit {
         this.nav.navigateForward("/home")
         return;
       }
-
+      
 
 
 
