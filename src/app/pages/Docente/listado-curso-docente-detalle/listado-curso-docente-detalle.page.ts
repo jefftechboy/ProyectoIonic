@@ -48,7 +48,7 @@ export class ListadoCursoDocenteDetallePage implements OnInit {
           }
           });
         });
-  });
+    });
   }
 
   isModalOpen = false;

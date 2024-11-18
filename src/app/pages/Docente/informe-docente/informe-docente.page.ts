@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { ModalController } from '@ionic/angular';
 import { InformeModalComponent } from 'src/app/components/modulo/informe-modal/informe-modal.component'; // Ajusta la ruta según la estructura de tu proyecto
 
@@ -14,27 +15,72 @@ interface Asignatura { // Define la interfaz aquí
   styleUrls: ['./informe-docente.page.scss'],
 })
 export class InformeDocentePage implements OnInit {
+
   // Usa la interfaz para definir el array de asignaturas
   asignaturas: Asignatura[] = [
-    { nombre: 'Aplicacion Movil', seccion: '007D', horario: 'Lunes 08:00-10:00  y  Viernes: 08:30-09:50' },
-    { nombre: 'Programacion Web', seccion: '011D', horario: 'Martes 08:30-09:50 y  Miercoles: 08:30-09:50 ' },
-    { nombre: 'Fundamentos de Programacion', seccion: '015D', horario: 'Jueves 08:30:00-10:40 y Martes 10:00-12:00' },
-    { nombre: 'Modelamiento Base de Datos', seccion: '008D', horario: 'Jueves 17:00-19:00 y Miercoles 14:30-16:40' },
-    { nombre: 'Desarrollo Software', seccion: '012D', horario: 'Viernes 10:00-12:50 y Lunes 15:30-17:00 ' }
+    { nombre: 'App Movil', seccion: '007D', horario: 'Miercoles 08:31-09:50  y  Viernes: 08:31-10:40' },
+    { nombre: 'App Movil', seccion: '010D', horario: 'Martes 10:00-11:30  y  Jueves: 10:00-12:10' },
+    { nombre: 'App Movil', seccion: '012V', horario: 'Lunes 18:00-19:30  y  Miercoles: 18:00-20:10' },
+    { nombre: 'Desarrollo de Software', seccion: '003P', horario: 'Lunes 08:31-09:50  y  Viernes: 08:31-10:40' },
+    { nombre: 'Desarrollo de Software', seccion: '005P', horario: 'Martes 10:00-11:30  y  Viernes: 10:00-12:10' },
+    { nombre: 'Desarrollo de Software', seccion: '007P', horario: 'Lunes 18:00-19:30  y  Martes: 18:00-20:10' },
   ];
 
-  constructor(private modalController: ModalController) {}
+  constructor(private modalController: ModalController,private afs: AngularFirestore) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.getAsignaturas().then(asignaturas => {
+      console.log('Asignaturas recibidas:', asignaturas);
+    }).catch(err => {
+      console.error('Error al obtener las asignaturas:', err);
+    });
+  }
+
+  // Método separado para obtener las asignaturas
+  getAsignaturas(): Promise<string[]> {
+    return new Promise((resolve, reject) => {
+      this.afs.collection('Asignatura')
+        .snapshotChanges()
+        .subscribe({
+          next: (actions: any[]) => {
+            const asignaturas: string[] = [];
+            
+            if (actions.length === 0) {
+              resolve(asignaturas); // Retornamos un array vacío si no hay asignaturas
+            } else {
+              actions.forEach(a => {
+                const data = a.payload.doc.data() as { Codigo: string, nombre: string };
+            
+                if (data) {
+                  asignaturas.push(data.Codigo);
+                }
+              });
+              
+              resolve(asignaturas); // Retornamos las asignaturas cuando estén listas
+            }
+          },
+          error: (err) => {
+            console.error('Error al obtener las asignaturas:', err);
+            reject(err); // En caso de error, rechazamos la promesa
+          }
+        });
+    });
+  }
 
   // Especifica el tipo del parámetro asignatura
   async openModal(asignatura: Asignatura) {
-    const modal = await this.modalController.create({
-      component: InformeModalComponent,
-      componentProps: {
-        asignatura: asignatura
-      }
-    });
-    return await modal.present();
+    try {
+      localStorage.setItem("asignaturaSeleccionada",JSON.stringify(asignatura));
+      const modal = await this.modalController.create({
+        component: InformeModalComponent,
+        componentProps: {
+          asignatura: asignatura
+        }
+      });
+      return await modal.present();
+    } catch (error) {
+      return;
+    }
+
   }
 }
