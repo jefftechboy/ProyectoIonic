@@ -23,7 +23,7 @@
                       AlumnosPorSeccion[curso.id][seccion.id] && 
                       AlumnosPorSeccion[curso.id][seccion.id].length > 0">
             <div *ngFor="let alumno of AlumnosPorSeccion[curso.id][seccion.id]">
-            <ion-card class="asignatura-card" (click)="openModal(curso.id, seccion.id, alumno.id)">
+            <ion-card class="asignatura-card"  name="botonseccion" (click)="openModal(curso.id, seccion.id, alumno.id)">
               <ion-card-header>
                 <ion-card-title style="text-align: center;">{{ curso.id }} {{ seccion.id }} </ion-card-title>
               </ion-card-header>
