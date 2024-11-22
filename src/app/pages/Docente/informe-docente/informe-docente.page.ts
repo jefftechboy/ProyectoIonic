@@ -1,15 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { ModalController, NavController } from '@ionic/angular';  // Asegúrate de importar ModalController
-import { InformeModalComponent } from 'src/app/components/modulo/informe-modal/informe-modal.component';
-import { AsistenciaAlumnoService } from 'src/app/servicios/asistencia/asistencia-alumno.service';
-import { CursoDocenteService } from 'src/app/servicios/detalle/curso-docente.service';
-import { LoginService } from 'src/app/servicios/inicio/login.service';
+import { ModalController } from '@ionic/angular';
+import { InformeModalComponent } from 'src/app/components/modulo/informe-modal/informe-modal.component'; // Ajusta la ruta según la estructura de tu proyecto
 
-// Interfaz de Asignatura
-interface Asignatura {
-  asignatura: string;  // Nombre de la asignatura
-  secciones: string[];  // Lista de secciones
+interface Asignatura { // Define la interfaz aquí
+  nombre: string;
+  seccion: string;
+  horario: string;
 }
 
 @Component({
@@ -18,64 +15,72 @@ interface Asignatura {
   styleUrls: ['./informe-docente.page.scss'],
 })
 export class InformeDocentePage implements OnInit {
-  asignaturas: Asignatura[] = [];  // Array para almacenar las asignaturas
 
-  constructor(
-    public lg: LoginService,
-    public hh: AsistenciaAlumnoService,
-    public vp: NavController,
-    public cd: CursoDocenteService,
-    private modalController: ModalController  // Agrega ModalController aquí
-  ) { }
+  // Usa la interfaz para definir el array de asignaturas
+  asignaturas: Asignatura[] = [
+    { nombre: 'App Movil', seccion: '007D', horario: 'Miercoles 08:31-09:50  y  Viernes: 08:31-10:40' },
+    { nombre: 'App Movil', seccion: '010D', horario: 'Martes 10:00-11:30  y  Jueves: 10:00-12:10' },
+    { nombre: 'App Movil', seccion: '012V', horario: 'Lunes 18:00-19:30  y  Miercoles: 18:00-20:10' },
+    { nombre: 'Desarrollo de Software', seccion: '003P', horario: 'Lunes 08:31-09:50  y  Viernes: 08:31-10:40' },
+    { nombre: 'Desarrollo de Software', seccion: '005P', horario: 'Martes 10:00-11:30  y  Viernes: 10:00-12:10' },
+    { nombre: 'Desarrollo de Software', seccion: '007P', horario: 'Lunes 18:00-19:30  y  Martes: 18:00-20:10' },
+  ];
+
+  constructor(private modalController: ModalController,private afs: AngularFirestore) {}
 
   ngOnInit() {
-    this.AsignaturasGeneralesDocente();
-  }
-
-  TodaAsignatura: any[] = [];
-  SeccionesPorAsignatura: { [key: string]: any[] } = {};
-  nombreProfesor: String = this.lg.nombreAlumno;
-
-  AsignaturasGeneralesDocente() {
-    this.hh.TodasLasAsignaturas().subscribe(data => {
-      this.TodaAsignatura = data;
-      console.log('Datos recibidos para todas las asignaturas:', this.TodaAsignatura);
-
-      // SECCIONES SEGÚN ASIGNATURA
-      this.TodaAsignatura.forEach(curso => {
-        this.cd.SeccionesPorAsignaturaProfesor(curso.id, this.nombreProfesor).subscribe(secciones => {
-          secciones.forEach(sec => {
-            if ((sec.Profesor === this.nombreProfesor)) {
-              this.SeccionesPorAsignatura[curso.id] = secciones;
-              console.log('Secciones de la asignatura:', secciones);
-              // Aquí agregamos la asignatura y sus secciones a la lista
-              this.asignaturas.push({
-                asignatura: curso.nombre, // El nombre de la asignatura
-                secciones: secciones.map(sec => sec.NombreSeccion) // Mapeamos solo el nombre de la sección
-              });
-            }
-          });
-        });
-      });
-
-      console.log('Asignaturas con secciones:', this.asignaturas);
+    this.getAsignaturas().then(asignaturas => {
+      console.log('Asignaturas recibidas:', asignaturas);
+    }).catch(err => {
+      console.error('Error al obtener las asignaturas:', err);
     });
   }
 
+  // Método separado para obtener las asignaturas
+  getAsignaturas(): Promise<string[]> {
+    return new Promise((resolve, reject) => {
+      this.afs.collection('Asignatura')
+        .snapshotChanges()
+        .subscribe({
+          next: (actions: any[]) => {
+            const asignaturas: string[] = [];
+            
+            if (actions.length === 0) {
+              resolve(asignaturas); // Retornamos un array vacío si no hay asignaturas
+            } else {
+              actions.forEach(a => {
+                const data = a.payload.doc.data() as { Codigo: string, nombre: string };
+            
+                if (data) {
+                  asignaturas.push(data.Codigo);
+                }
+              });
+              
+              resolve(asignaturas); // Retornamos las asignaturas cuando estén listas
+            }
+          },
+          error: (err) => {
+            console.error('Error al obtener las asignaturas:', err);
+            reject(err); // En caso de error, rechazamos la promesa
+          }
+        });
+    });
+  }
 
-  // Método para abrir el modal y pasar la asignatura seleccionada
+  // Especifica el tipo del parámetro asignatura
   async openModal(asignatura: Asignatura) {
     try {
-      localStorage.setItem("asignaturaSeleccionada", JSON.stringify(asignatura));  // Guardar en localStorage
+      localStorage.setItem("asignaturaSeleccionada",JSON.stringify(asignatura));
       const modal = await this.modalController.create({
-        component: InformeModalComponent,  // Componente del modal
+        component: InformeModalComponent,
         componentProps: {
-          asignatura: asignatura  // Pasar la asignatura al modal
+          asignatura: asignatura
         }
       });
-      return await modal.present();  // Mostrar el modal
+      return await modal.present();
     } catch (error) {
-      console.error('Error al abrir el modal:', error);  // Manejo de errores
+      return;
     }
+
   }
 }
